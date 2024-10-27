@@ -1,0 +1,22 @@
+version: '3.8'  
+
+services:
+  angular-app:
+    build:
+      context: .  
+      dockerfile: Dockerfile 
+    volumes:
+      - .:/app 
+    working_dir: /app  
+    ports:
+      - "4200:4200" 
+    command: npm start  
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: npm test 
