@@ -1,0 +1,26 @@
+<div>
+    <h2>Laboratories</h2>
+    <ul>
+      <li *ngFor="let labo of laboratoires" (click)="selectLaboratory(labo)">
+        {{ labo.nom }} - {{ labo.nrc }}
+        <button (click)="deleteLaboratory(labo.id)">Delete</button>
+      </li>
+    </ul>
+  
+    <h3 *ngIf="selectedLabo">Edit Laboratory</h3>
+    <form *ngIf="selectedLabo">
+      <input [(ngModel)]="selectedLabo.nom" placeholder="Name">
+      <input [(ngModel)]="selectedLabo.logo" placeholder="Logo">
+      <input [(ngModel)]="selectedLabo.nrc" placeholder="NRC">
+      <button (click)="updateLaboratory()">Update</button>
+    </form>
+  
+    <h3>Add New Laboratory</h3>
+    <form>
+      <input [(ngModel)]="newLabo.nom" placeholder="Name">
+      <input [(ngModel)]="newLabo.logo" placeholder="Logo">
+      <input [(ngModel)]="newLabo.nrc" placeholder="NRC">
+      <button (click)="addLaboratory()">Add</button>
+    </form>
+  </div>
+  
