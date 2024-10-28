@@ -1,24 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { LaboratoireService } from '../services/laboratoire.service';
-
-interface Laboratoire {
-  id: number;
-  nom: string;
-  logo: string;
-  nrc: string;
-  isActive: boolean;
-  dateActivation: boolean;
-}
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { LaboratoireService, Laboratoire } from '../services/laboratoire.service';
 
 @Component({
   selector: 'app-laboratoire',
   templateUrl: './laboratoire.component.html',
-  styleUrls: ['./laboratoire.component.css']
+  styleUrls: ['./laboratoire.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule]
 })
 export class LaboratoireComponent implements OnInit {
   laboratoires: Laboratoire[] = [];
-  newLabo: Laboratoire = { id: 0, nom: '', logo: '', nrc: '', isActive: true, dateActivation: false };
+  newLabo: Laboratoire = {
+    id: 0,
+    nom: '',
+    logo: '',
+    nrc: '',
+    isActive: true,
+    dateActivation: new Date()
+  };
   selectedLabo?: Laboratoire;
+  loading: boolean = false;
 
   constructor(private laboratoireService: LaboratoireService) {}
 
@@ -27,30 +30,68 @@ export class LaboratoireComponent implements OnInit {
   }
 
   loadLaboratories(): void {
-    this.laboratoireService.getAllLaboratories().subscribe(
-      laboratoires => this.laboratoires = laboratoires,
-      error => console.error('Error loading laboratories:', error)
-    );
+    this.loading = true;
+    this.laboratoireService.getAllLaboratories().subscribe({
+      next: (laboratoires) => {
+        this.laboratoires = laboratoires;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading laboratories:', error);
+        alert('Failed to load laboratories.');
+        this.loading = false;
+      }
+    });
   }
 
   addLaboratory(): void {
-    this.laboratoireService.createLaboratory(this.newLabo).subscribe(labo => {
-      this.laboratoires.push(labo);
-      this.newLabo = { id: 0, nom: '', logo: '', nrc: '', isActive: true, dateActivation: false };
+    this.laboratoireService.createLaboratory(this.newLabo).subscribe({
+      next: (labo) => {
+        this.laboratoires.push(labo);
+        this.newLabo = {
+          id: 0,
+          nom: '',
+          logo: '',
+          nrc: '',
+          isActive: true,
+          dateActivation: new Date()
+        };
+        this.loadLaboratories();
+      },
+      error: (error) => {
+        console.error('Error creating laboratory:', error);
+        alert('Failed to create laboratory.');
+      }
     });
   }
 
   updateLaboratory(): void {
     if (this.selectedLabo) {
-      this.laboratoireService.updateLaboratory(this.selectedLabo.id, this.selectedLabo).subscribe(() => {
-        this.loadLaboratories();
-        this.selectedLabo = undefined;
+      this.laboratoireService.updateLaboratory(this.selectedLabo.id, this.selectedLabo).subscribe({
+        next: () => {
+          this.loadLaboratories();
+          this.selectedLabo = undefined;
+        },
+        error: (error) => {
+          console.error('Error updating laboratory:', error);
+          alert('Failed to update laboratory.');
+        }
       });
     }
   }
 
   deleteLaboratory(id: number): void {
-    this.laboratoireService.deleteLaboratory(id).subscribe(() => this.loadLaboratories());
+    if (confirm('Are you sure you want to delete this laboratory?')) {
+      this.laboratoireService.deleteLaboratory(id).subscribe({
+        next: () => {
+          this.loadLaboratories();
+        },
+        error: (error) => {
+          console.error('Error deleting laboratory:', error);
+          alert('Failed to delete laboratory.');
+        }
+      });
+    }
   }
 
   selectLaboratory(labo: Laboratoire): void {
