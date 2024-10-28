@@ -1,26 +1,86 @@
-<div>
-    <h2>Laboratories</h2>
-    <ul>
-      <li *ngFor="let labo of laboratoires" (click)="selectLaboratory(labo)">
-        {{ labo.nom }} - {{ labo.nrc }}
-        <button (click)="deleteLaboratory(labo.id)">Delete</button>
-      </li>
-    </ul>
+<div class="container mx-auto p-4">
+  <h2 class="text-2xl font-bold mb-4">Laboratories</h2>
   
-    <h3 *ngIf="selectedLabo">Edit Laboratory</h3>
-    <form *ngIf="selectedLabo">
-      <input [(ngModel)]="selectedLabo.nom" placeholder="Name">
-      <input [(ngModel)]="selectedLabo.logo" placeholder="Logo">
-      <input [(ngModel)]="selectedLabo.nrc" placeholder="NRC">
-      <button (click)="updateLaboratory()">Update</button>
-    </form>
-  
-    <h3>Add New Laboratory</h3>
-    <form>
-      <input [(ngModel)]="newLabo.nom" placeholder="Name">
-      <input [(ngModel)]="newLabo.logo" placeholder="Logo">
-      <input [(ngModel)]="newLabo.nrc" placeholder="NRC">
-      <button (click)="addLaboratory()">Add</button>
+  <!-- Loading Indicator -->
+  <div *ngIf="loading" class="text-center py-4">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto"></div>
+  </div>
+
+  <!-- Laboratories List -->
+  <ul class="space-y-2 mb-6">
+    <li *ngFor="let labo of laboratoires" 
+        class="flex justify-between items-center p-3 bg-white rounded shadow hover:shadow-md"
+        (click)="selectLaboratory(labo)">
+      <span>{{ labo.nom }} - {{ labo.nrc }}</span>
+      <button 
+        (click)="deleteLaboratory(labo.id); $event.stopPropagation();"
+        class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
+        Delete
+      </button>
+    </li>
+  </ul>
+
+  <!-- Edit Form -->
+  <div *ngIf="selectedLabo" class="mb-6 p-4 bg-gray-100 rounded">
+    <h3 class="text-xl font-semibold mb-3">Edit Laboratory</h3>
+    <form (ngSubmit)="updateLaboratory()" #editLaboratoryForm="ngForm" class="space-y-3">
+      <div>
+        <input [(ngModel)]="selectedLabo.nom" 
+               name="nom" 
+               placeholder="Name" 
+               required
+               class="w-full p-2 border rounded">
+      </div>
+      <div>
+        <input [(ngModel)]="selectedLabo.logo" 
+               name="logo" 
+               placeholder="Logo"
+               class="w-full p-2 border rounded">
+      </div>
+      <div>
+        <input [(ngModel)]="selectedLabo.nrc" 
+               name="nrc" 
+               placeholder="NRC" 
+               required
+               class="w-full p-2 border rounded">
+      </div>
+      <button type="submit" 
+              [disabled]="editLaboratoryForm.invalid"
+              class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-400">
+        Update
+      </button>
     </form>
   </div>
-  
+
+  <!-- Add Form -->
+  <div class="p-4 bg-gray-100 rounded">
+    <h3 class="text-xl font-semibold mb-3">Add New Laboratory</h3>
+    <form (ngSubmit)="addLaboratory()" #newLaboratoryForm="ngForm" class="space-y-3">
+      <div>
+        <input [(ngModel)]="newLabo.nom" 
+               name="nom" 
+               placeholder="Name" 
+               required
+               class="w-full p-2 border rounded">
+      </div>
+      <div>
+        <input [(ngModel)]="newLabo.logo" 
+               name="logo" 
+               placeholder="Logo"
+               class="w-full p-2 border rounded">
+      </div>
+      <div>
+        <input [(ngModel)]="newLabo.nrc" 
+               name="nrc" 
+               placeholder="NRC" 
+               required
+               class="w-full p-2 border rounded">
+      </div>
+      <button type="submit" 
+              [disabled]="newLaboratoryForm.invalid"
+              class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:bg-gray-400">
+        Add
+      </button>
+    </form>
+  </div>
+</div>
