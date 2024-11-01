@@ -23,19 +23,15 @@ export class LaboratoireService {
     return this.http.get<Laboratoire[]>(`${this.apiUrl}/all`);
   }
 
-  getLaboratoryById(id: number): Observable<Laboratoire> {
-    return this.http.get<Laboratoire>(`${this.apiUrl}/${id}`);
-  }
-
   createLaboratory(item: Laboratoire): Observable<Laboratoire> {
-    return this.http.post<Laboratoire>(`${this.apiUrl}/add`, item);
+    return this.http.post<Laboratoire>(`${this.apiUrl}`, item);
   }
 
   updateLaboratory(id: number, item: Laboratoire): Observable<Laboratoire> {
-    return this.http.put<Laboratoire>(`${this.apiUrl}/update/${id}`, item);
+    return this.http.put<Laboratoire>(`${this.apiUrl}/${id}`, item);
   }
 
   deleteLaboratory(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
