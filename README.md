@@ -1,3 +1,7 @@
+# OptiLab
+laboratory management system
+# Optilab backend part
+more details will be added soon
 # Optilab Frontend
 
 This is the frontend part of the Optilab project, built using Angular. This guide explains how to clone the repository, run the application, and execute unit tests using Docker and Docker Compose.
@@ -56,6 +60,9 @@ To run the unit tests using Docker Compose, follow these steps:
 - **`docker-compose.yml`**: Docker Compose configuration for easy setup.
 - **`package.json`**: Contains project dependencies and scripts.
 
+
+
+
 ## Troubleshooting
 
 - If `localhost:4200` is not accessible, ensure the Angular app is configured to bind to `0.0.0.0` by modifying the `start` script in `package.json`:
@@ -65,4 +72,6 @@ To run the unit tests using Docker Compose, follow these steps:
 
 - Ensure no firewall or security software is blocking Docker from using the exposed port.
 
+# Optilab Devops part
+more details will be added soon
 
