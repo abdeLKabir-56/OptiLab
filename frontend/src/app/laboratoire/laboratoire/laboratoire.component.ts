@@ -36,8 +36,7 @@ export class LaboratoireComponent implements OnInit {
         this.laboratoires = laboratoires;
         this.loading = false;
       },
-      error: (error) => {
-        console.error('Error loading laboratories:', error);
+      error: () => {
         alert('Failed to load laboratories.');
         this.loading = false;
       }
@@ -48,20 +47,10 @@ export class LaboratoireComponent implements OnInit {
     this.laboratoireService.createLaboratory(this.newLabo).subscribe({
       next: (labo) => {
         this.laboratoires.push(labo);
-        this.newLabo = {
-          id: 0,
-          nom: '',
-          logo: '',
-          nrc: '',
-          isActive: true,
-          dateActivation: new Date()
-        };
+        this.resetNewLabo();
         this.loadLaboratories();
       },
-      error: (error) => {
-        console.error('Error creating laboratory:', error);
-        alert('Failed to create laboratory.');
-      }
+      error: () => alert('Failed to create laboratory.')
     });
   }
 
@@ -72,10 +61,7 @@ export class LaboratoireComponent implements OnInit {
           this.loadLaboratories();
           this.selectedLabo = undefined;
         },
-        error: (error) => {
-          console.error('Error updating laboratory:', error);
-          alert('Failed to update laboratory.');
-        }
+        error: () => alert('Failed to update laboratory.')
       });
     }
   }
@@ -83,18 +69,24 @@ export class LaboratoireComponent implements OnInit {
   deleteLaboratory(id: number): void {
     if (confirm('Are you sure you want to delete this laboratory?')) {
       this.laboratoireService.deleteLaboratory(id).subscribe({
-        next: () => {
-          this.loadLaboratories();
-        },
-        error: (error) => {
-          console.error('Error deleting laboratory:', error);
-          alert('Failed to delete laboratory.');
-        }
+        next: () => this.loadLaboratories(),
+        error: () => alert('Failed to delete laboratory.')
       });
     }
   }
 
   selectLaboratory(labo: Laboratoire): void {
     this.selectedLabo = { ...labo };
+  }
+
+  private resetNewLabo(): void {
+    this.newLabo = {
+      id: 0,
+      nom: '',
+      logo: '',
+      nrc: '',
+      isActive: true,
+      dateActivation: new Date()
+    };
   }
 }

@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { LaboratoireService } from './laboratoire.service';
+import { LaboratoireService, Laboratoire } from './laboratoire.service';
 
 describe('LaboratoireService', () => {
   let service: LaboratoireService;
   let httpMock: HttpTestingController;
+  const baseUrl = 'http://localhost:8050/api/v1/laboratory';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -20,21 +21,28 @@ describe('LaboratoireService', () => {
   });
 
   it('should fetch all laboratories', () => {
-    const dummyLaboratories = [
-      { id: 1, nom: 'Lab 1', logo: 'logo1.png', nrc: 'NRC1', isActive: true, dateActivation: new Date() }
+    const dummyLaboratories: Laboratoire[] = [
+      { 
+        id: 1, 
+        nom: 'Lab 1', 
+        logo: 'logo1.png', 
+        nrc: 'NRC1', 
+        isActive: true, 
+        dateActivation: new Date() 
+      }
     ];
 
     service.getAllLaboratories().subscribe(labs => {
       expect(labs).toEqual(dummyLaboratories);
     });
 
-    const req = httpMock.expectOne('http://localhost:8050/api/v1/laboratory/all');
+    const req = httpMock.expectOne(`${baseUrl}/all`);
     expect(req.request.method).toBe('GET');
     req.flush(dummyLaboratories);
   });
 
   it('should create a new laboratory', () => {
-    const newLaboratory = {
+    const newLaboratory: Laboratoire = {
       id: 1,
       nom: 'Lab 1',
       logo: 'logo1.png',
@@ -47,13 +55,13 @@ describe('LaboratoireService', () => {
       expect(lab).toEqual(newLaboratory);
     });
 
-    const req = httpMock.expectOne('http://localhost:8050/api/v1/laboratory/add');
+    const req = httpMock.expectOne(baseUrl);
     expect(req.request.method).toBe('POST');
     req.flush(newLaboratory);
   });
 
   it('should update a laboratory', () => {
-    const updatedLaboratory = {
+    const updatedLaboratory: Laboratoire = {
       id: 1,
       nom: 'Updated Lab',
       logo: 'updated_logo.png',
@@ -66,7 +74,7 @@ describe('LaboratoireService', () => {
       expect(lab).toEqual(updatedLaboratory);
     });
 
-    const req = httpMock.expectOne('http://localhost:8050/api/v1/laboratory/update/1');
+    const req = httpMock.expectOne(`${baseUrl}/1`);
     expect(req.request.method).toBe('PUT');
     req.flush(updatedLaboratory);
   });
@@ -74,7 +82,7 @@ describe('LaboratoireService', () => {
   it('should delete a laboratory', () => {
     service.deleteLaboratory(1).subscribe();
 
-    const req = httpMock.expectOne('http://localhost:8050/api/v1/laboratory/delete/1');
+    const req = httpMock.expectOne(`${baseUrl}/1`);
     expect(req.request.method).toBe('DELETE');
     req.flush({});
   });

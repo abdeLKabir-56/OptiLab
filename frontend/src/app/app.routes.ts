@@ -9,12 +9,12 @@ export const routes: Routes = [
   },
   { 
     path: '', 
-    redirectTo: '/', 
+    redirectTo: 'laboratories', 
     pathMatch: 'full',
     title: 'OptiLab - Home'
   },
   { 
     path: '**', 
-    redirectTo: '/' 
+    redirectTo: 'laboratories' 
   }
 ];
