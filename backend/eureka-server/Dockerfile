@@ -4,7 +4,7 @@ ARG VERSION=1.0.0
 WORKDIR /app
 ENV JAR_VERSION=${VERSION}
 # Copy the pre-built jar from the Docker context
-COPY target/eureka-server-${JAR_VERSION}.jar /app/
+COPY ./target/eureka-server-${JAR_VERSION}.jar /app/
 # Set environment variable for app version
 # Run the application
 CMD java -jar eureka-server-${JAR_VERSION}.jar
