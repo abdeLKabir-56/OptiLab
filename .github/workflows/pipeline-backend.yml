@@ -33,6 +33,7 @@ jobs:
         run: |
           cd backend/eureka-server
           mvn clean compile
+          ls -l target
           cd ../laboratoire
           mvn clean compile
 
@@ -112,7 +113,7 @@ jobs:
   build-image:
     runs-on: ubuntu-latest
     name: Build and push Docker Images
-    needs: build
+    needs: [build]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
