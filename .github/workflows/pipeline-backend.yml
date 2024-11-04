@@ -143,7 +143,7 @@ jobs:
           context: backend/eureka-server
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/eureka-server:${{ steps.extract_version.outputs.VERSION }}:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/eureka-server:${{ steps.extract_version.outputs.VERSION }}
           build-args: |
             VERSION=${{ steps.extract_version.outputs.VERSION }}
       - name: Build and Push Image of Laboratoire to Docker Hub
@@ -152,7 +152,7 @@ jobs:
           context: backend/laboratoire
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/laboratoire:${{ steps.extract_version.outputs.VERSION }}:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/laboratoire:${{ steps.extract_version.outputs.VERSION }}
           build-args: |
             PROFILE=docker
             VERSION=${{ steps.extract_version.outputs.VERSION }}
