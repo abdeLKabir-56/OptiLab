@@ -8,7 +8,7 @@ on:
       - backend/**
       - backend/eureka-server/**
       - backend/laboratoire/**
-      - .github/workflows
+      - .github/workflows/*-backend.yml
 
 jobs:
   compile:
