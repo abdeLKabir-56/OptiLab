@@ -1,6 +1,6 @@
 # Stage 2: Run the application
 FROM openjdk:17-jdk-slim
-ARG VERSION=1.0.0
+ARG VERSION=0.0.1-SNAPSHOT
 WORKDIR /app
 ENV JAR_VERSION=${VERSION}
 # Copy the pre-built jar from the Docker context
