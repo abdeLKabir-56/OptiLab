@@ -39,6 +39,15 @@ jobs:
   unit-test:
     runs-on: ubuntu-latest
     name: Unit Test
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: laboratoire
+          POSTGRES_USER: idhem
+          POSTGRES_PASSWORD: idhem
+        ports:
+          - 5432:5432
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -54,6 +63,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y maven
       - name: Run Tests
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: your_database_name
+          DB_USER: your_username
+          DB_PASSWORD: your_password
         run: |
           cd backend/eureka-server
           mvn clean test
@@ -87,7 +102,7 @@ jobs:
 
   build-image:
     runs-on: ubuntu-latest
-    name: Build Docker Image
+    name: Build and push Docker Images
     needs: build
     steps:
       - name: Checkout Code
