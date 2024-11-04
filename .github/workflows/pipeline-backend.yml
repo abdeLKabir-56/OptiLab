@@ -1,0 +1,135 @@
+name: Optilab backend pipeline
+
+on:
+  push:
+    branches:
+      - devops
+    paths:
+      - backend/**
+      - backend/eureka-server/**
+      - backend/laboratoire/**
+      - backend/.github/workflows
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    name: Compile Project
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup JDK
+        uses: actions/setup-jdk@v4
+        with:
+          java-version: 17
+          distribution: 'correto'
+      - name: Install Maven
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y maven
+
+      - name: Compile Project
+        run: |
+          cd backend/eureka-server
+          mvn clean compile
+          cd ../laboratoire
+          mvn clean compile
+
+  unit-test:
+    runs-on: ubuntu-latest
+    name: Unit Test
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup JDK
+        uses: actions/setup-jdk@v4
+        with:
+          java-version: 17
+          distribution: 'correto'
+      - name: Install Maven
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y maven
+      - name: Run Tests
+        run: |
+          cd backend/eureka-server
+          mvn clean test
+          cd ../laboratoire
+          mvn clean test
+
+  build:
+    runs-on: ubuntu-latest
+    name: Build Backend
+    needs: [compile, unit-test]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup JDK
+        uses: actions/setup-jdk@v4
+        with:
+          java-version: 17
+          distribution: 'correto'
+      - name: Install Maven
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y maven
+      - name: Build Project
+        run: |
+          cd backend/eureka-server
+          mvn clean package
+          cd ../laboratoire
+          mvn clean package
+
+  build-image:
+    runs-on: ubuntu-latest
+    name: Build Docker Image
+    needs: build
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup JDK
+        uses: actions/setup-jdk@v4
+        with:
+          java-version: 17
+          distribution: 'correto'
+      - name: Install Maven
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y maven
+      - name: Extract Project Version for Laboratory
+        id: extract_version
+        run: |
+          cd backend/laboratoire
+          echo "VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and Push Image of Eureka to Docker Hub
+        uses: docker/build-push-action@v5
+        with:
+          context: backend/eureka-server
+          file: Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/eureka-server:${{ steps.extract_version.outputs.VERSION }}:latest
+          build-args: |
+            VERSION=${{ steps.extract_version.outputs.VERSION }}
+      - name: Build and Push Image of Laboratoire to Docker Hub
+        uses: docker/build-push-action@v5
+        with:
+          context: backend/laboratoire
+          file: Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/laboratoire:${{ steps.extract_version.outputs.VERSION }}:latest
+          build-args: |
+            PROFILE=docker
+            VERSION=${{ steps.extract_version.outputs.VERSION }}
+
