@@ -8,7 +8,7 @@ on:
       - backend/**
       - backend/eureka-server/**
       - backend/laboratoire/**
-      - backend/.github/workflows
+      - .github/workflows
 
 jobs:
   compile:
