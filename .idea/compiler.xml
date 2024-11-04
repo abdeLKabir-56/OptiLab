@@ -2,18 +2,19 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="config-server" />
-        <module name="discovery" />
+        <module name="eureka-server" />
         <module name="laboratoire" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="config-server" target="17" />
       <module name="discovery" target="17" />
+      <module name="eureka-server" target="17" />
       <module name="laboratoire" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -21,6 +22,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="config-server" options="-parameters" />
       <module name="discovery" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
       <module name="laboratoire" options="-parameters" />
     </option>
   </component>

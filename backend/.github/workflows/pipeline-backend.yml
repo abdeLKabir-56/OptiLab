@@ -1,0 +1,4 @@
+name : Optilab backend pipeline
+
+on:
+  push
