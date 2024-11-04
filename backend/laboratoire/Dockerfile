@@ -5,8 +5,9 @@ ARG PROFILE=docker
 
 
 WORKDIR /app
+ENV JAR_VERSION=${VERSION}
 # Copy the pre-built jar from the Docker context
-COPY target/laboratoire-*.jar /app/
+COPY target/laboratoire-${JAR_VERSION}.jar /app/
 # Set environment variable for app version
 ENV JAR_VERSION=${VERSION}
 ENV ACTIVE_PROFILE=${PROFILE}
