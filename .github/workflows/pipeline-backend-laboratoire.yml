@@ -1,19 +1,24 @@
-name: Optilab backend pipeline
+# .github/workflows/laboratoire-backend.yml
+name: Laboratoire Backend Pipeline
 
 on:
   push:
     branches:
       - devops
     paths:
-      - backend/**
-      - backend/eureka-server/**
       - backend/laboratoire/**
-      - .github/workflows/*-backend.yml
+      - .github/workflows/*-backend-laboratoire.yml
+  pull_request:
+    branches:
+      - devops
+    paths:
+      - backend/laboratoire/**
+      - .github/workflows/*-backend-laboratoire.yml
 
 jobs:
   compile:
     runs-on: ubuntu-latest
-    name: Compile Project
+    name: Compile Laboratoire
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -28,18 +33,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y maven
-
-      - name: Compile Project
+      - name: Compile Laboratoire
         run: |
-          cd backend/eureka-server
-          mvn clean compile
-          ls -l target
-          cd ../laboratoire
+          cd backend/laboratoire
           mvn clean compile
 
   unit-test:
     runs-on: ubuntu-latest
-    name: Unit Test
+    name: Unit Test Laboratoire
     services:
       postgres:
         image: postgres:latest
@@ -71,14 +72,12 @@ jobs:
           DB_USER: idhem
           DB_PASSWORD: idhem
         run: |
-          cd backend/eureka-server
-          mvn clean test
-          cd ../laboratoire
+          cd backend/laboratoire
           mvn clean test
 
   build:
     runs-on: ubuntu-latest
-    name: Build Backend
+    name: Build Laboratoire
     needs: [compile, unit-test]
     services:
       postgres:
@@ -103,17 +102,15 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y maven
-      - name: Build Project
+      - name: Build Laboratoire
         run: |
-          cd backend/eureka-server
-          mvn clean package
-          cd ../laboratoire
+          cd backend/laboratoire
           mvn clean package
 
   build-image:
     runs-on: ubuntu-latest
-    name: Build and push Docker Images
-    needs: [build]
+    name: Build and Push Laboratoire Docker Image
+    needs: build
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -128,7 +125,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y maven
-      - name: Extract Project Version for Laboratory
+      - name: Extract Project Version
         id: extract_version
         run: |
           cd backend/laboratoire
@@ -138,16 +135,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and Push Image of Eureka to Docker Hub
-        uses: docker/build-push-action@v5
-        with:
-          context: backend/eureka-server
-          file: backend/eureka-server/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/eureka-server:${{ steps.extract_version.outputs.VERSION }}
-          build-args: |
-            VERSION=${{ steps.extract_version.outputs.VERSION }}
-      - name: Build and Push Image of Laboratoire to Docker Hub
+      - name: Build and Push Laboratoire Image to Docker Hub
         uses: docker/build-push-action@v5
         with:
           context: backend/laboratoire
