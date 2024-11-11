@@ -76,7 +76,7 @@ jobs:
           fetch-depth: 0
       - name: Install jq
         run: |
-          apt-get install jq
+          sudo apt-get install jq
       - name: Extract Project Version
         id: extract_version
         run: |
