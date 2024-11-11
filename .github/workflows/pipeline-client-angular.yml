@@ -1,0 +1,67 @@
+name: Laboratoire frontend Pipeline
+
+on:
+  push:
+    branches:
+      - devops
+    paths:
+      - frontend/**
+      - .github/workflows/pipeline-client-angular.yml
+  pull_request:
+    branches:
+      - devops
+    paths:
+      - frontend/**
+      - .github/workflows/pipeline-client-angular.yml
+
+jobs:
+  test:
+    name: Testing angular app using Jest
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+    steps:
+      # {2}
+      - name: Checkout the source code
+        uses: actions/checkout@v3
+
+      # {3}
+      - name: Setup Node.js $
+        uses: actions/setup-node@v3
+        with:
+          node-version: $
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      # {4}
+      - name: Install dependencies
+        run: npm ci
+      # {5}
+      - name: Run tests
+        run: npm test
+  build:
+    name: building application
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+    steps:
+      # {2}
+      - name: Checkout the source code
+        uses: actions/checkout@v3
+
+      # {3}
+      - name: Setup Node.js $
+        uses: actions/setup-node@v3
+        with:
+          node-version: $
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      # {4}
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
