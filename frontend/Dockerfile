@@ -1,16 +1,15 @@
-# Use Node.js LTS version
-FROM node:18-alpine
-
+# Build stage
+FROM node:18-alpine AS build-stage
 WORKDIR /app
-
-# Copy package files
 COPY package*.json ./
-
-# Install dependencies with platform-specific binaries
-RUN npm install
-RUN npm i @angular/cli
-COPY . /app/
-EXPOSE 4200
-CMD npm start
-
-
+RUN npm i
+COPY ./ .
+RUN npm run build
+# Final stage
+FROM nginx:alpine
+# Copy the built app from the previous stage
+COPY --from=build-stage /app/dist/frontend/browser /usr/share/nginx/html
+# Copy the custom Nginx configuration file
+COPY ngnix.conf /etc/nginx/conf.d/default.conf
+# Expose port 80
+EXPOSE 80
