@@ -18,9 +18,6 @@ jobs:
   test:
     name: Testing angular app using Jest
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20]
     steps:
       # {2}
       - name: Checkout the source code
@@ -30,7 +27,7 @@ jobs:
       - name: Setup Node.js $
         uses: actions/setup-node@v3
         with:
-          node-version: $
+          node-version: '18'
           cache: 'npm'
           cache-dependency-path: package-lock.json
 
@@ -43,9 +40,7 @@ jobs:
   build:
     name: building application
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20]
+    needs: test
     steps:
       # {2}
       - name: Checkout the source code
@@ -55,7 +50,7 @@ jobs:
       - name: Setup Node.js $
         uses: actions/setup-node@v3
         with:
-          node-version: $
+          node-version: '18'
           cache: 'npm'
           cache-dependency-path: package-lock.json
 
