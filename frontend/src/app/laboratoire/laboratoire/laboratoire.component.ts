@@ -8,7 +8,7 @@ import { LaboratoireService, Laboratoire } from '../services/laboratoire.service
   templateUrl: './laboratoire.component.html',
   styleUrls: ['./laboratoire.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule],
 })
 export class LaboratoireComponent implements OnInit {
   laboratoires: Laboratoire[] = [];
@@ -32,16 +32,17 @@ export class LaboratoireComponent implements OnInit {
   loadLaboratories(): void {
     this.loading = true;
     this.laboratoireService.getAllLaboratories().subscribe({
-      next: (laboratoires) => {
-        this.laboratoires = laboratoires;
-        this.loading = false;
-      },
-      error: () => {
-        alert('Failed to load laboratories.');
-        this.loading = false;
-      }
+        next: (laboratoires) => {
+            this.laboratoires = laboratoires;
+            this.loading = false;
+        },
+        error: (err) => {
+            console.error('Error loading laboratories:', err); // Log error details
+            alert('Failed to load laboratories.');
+            this.loading = false;
+        }
     });
-  }
+}
 
   addLaboratory(): void {
     this.laboratoireService.createLaboratory(this.newLabo).subscribe({
