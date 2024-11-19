@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: api-gateway
+  zipkin:
+    base-url: http://localhost:9411
+
+  cloud:
+    gateway:
+      routes:
+        - id: laboratoire
+          uri: lb://LABORATOIRE
+          predicates:
+            - Path=/api/v1/laboratoires/**
+server:
+  port: 8888
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
