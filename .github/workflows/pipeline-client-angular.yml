@@ -1,0 +1,97 @@
+name: Laboratoire frontend Pipeline
+
+on:
+  push:
+    branches:
+      - devops
+    paths:
+      - frontend/**
+      - .github/workflows/pipeline-client-angular.yml
+  pull_request:
+    branches:
+      - devops
+    paths:
+      - frontend/**
+      - .github/workflows/pipeline-client-angular.yml
+
+jobs:
+  test:
+    name: Testing angular app using Jest
+    runs-on: ubuntu-latest
+    steps:
+      # {2}
+      - name: Checkout the source code
+        uses: actions/checkout@v3
+
+      # {3}
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      # {4}
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+      # {5}
+      - name: Run tests
+        run: |
+         cd frontend
+         npm test
+  build:
+    name: building application
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      # {2}
+      - name: Checkout the source code
+        uses: actions/checkout@v3
+
+      # {3}
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+
+      # {4}
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Build
+        run: |
+          cd frontend
+          npm run build --prod
+  build-image:
+    runs-on: ubuntu-latest
+    name: Build and Push frontend Docker Image
+    needs: build
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install jq
+        run: |
+          sudo apt-get install jq
+      - name: Extract Project Version
+        id: extract_version
+        run: |
+          cd frontend
+          echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_OUTPUT
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and Push frontend Image to Docker Hub
+        uses: docker/build-push-action@v5
+        with:
+          context: frontend
+          file: frontend/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/laboratoire-client:${{ steps.extract_version.outputs.VERSION }}
+
