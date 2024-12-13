@@ -25,17 +25,6 @@ services:
     volumes:
       - postgres_data2:/var/lib/postgresql/data2
 
-<<<<<<< HEAD
-  zipkin:
-    image: openzipkin/zipkin
-    container_name: zipkin
-    ports:
-      - "9411:9411"
-
-networks:
-  postgres:
-    driver: bridge
-=======
   laboratoire:
     build:
       context: ./laboratoire
@@ -51,7 +40,6 @@ networks:
     depends_on:
       - eureka-server
       - postgres
->>>>>>> devops
 
 volumes:
   postgres_data2:
