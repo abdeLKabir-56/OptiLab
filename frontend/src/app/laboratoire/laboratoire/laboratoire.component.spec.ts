@@ -2,8 +2,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { LaboratoireComponent } from './laboratoire.component';
 import { LaboratoireService } from '../services/laboratoire.service';
 import { of } from 'rxjs';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing'; 
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'; 
 interface Laboratoire {
   id: number;
   nom: string;
@@ -28,11 +29,13 @@ describe('LaboratoireComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [LaboratoireComponent, HttpClientTestingModule,RouterTestingModule],
-      providers: [
-        { provide: LaboratoireService, useValue: spy }
-      ]
-    }).compileComponents();
+    imports: [LaboratoireComponent, RouterTestingModule],
+    providers: [
+        { provide: LaboratoireService, useValue: spy },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
 
     laboratoireService = TestBed.inject(LaboratoireService);
   });
