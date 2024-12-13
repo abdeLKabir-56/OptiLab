@@ -4,13 +4,13 @@ name: Laboratoire Backend Pipeline
 on:
   push:
     branches:
-      - devops
+      - main
     paths:
       - backend/laboratoire/**
       - .github/workflows/*-backend-laboratoire.yml
   pull_request:
     branches:
-      - devops
+      - main
     paths:
       - backend/laboratoire/**
       - .github/workflows/*-backend-laboratoire.yml

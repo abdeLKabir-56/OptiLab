@@ -4,13 +4,13 @@ name: Eureka Backend Pipeline
 on:
   push:
     branches:
-      - devops
+      - main
     paths:
       - backend/eureka-server/**
       - .github/workflows/*-backend-eureka.yml
   pull_request:
     branches:
-      - devops
+      - main
     paths:
       - backend/eureka-server/**
       - .github/workflows/*-backend-eureka.yml

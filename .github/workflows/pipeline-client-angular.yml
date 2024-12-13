@@ -3,13 +3,13 @@ name: Laboratoire frontend Pipeline
 on:
   push:
     branches:
-      - devops
+      - main
     paths:
       - frontend/**
       - .github/workflows/pipeline-client-angular.yml
   pull_request:
     branches:
-      - devops
+      - main
     paths:
       - frontend/**
       - .github/workflows/pipeline-client-angular.yml
