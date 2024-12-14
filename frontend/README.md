@@ -1,68 +1,59 @@
-# Optilab Frontend
+# Frontend
 
-This is the frontend part of the Optilab project, built using Angular. This guide explains how to clone the repository, run the application, and execute unit tests using Docker and Docker Compose.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
 
-## Prerequisites
+## Development server
 
-- Ensure you have [Docker](https://www.docker.com/) installed and running on your machine.
-
-## Cloning the Repository
-
-To get started with the Optilab frontend, clone the repository using the following command:
+To start a local development server, run:
 
 ```bash
-git clone https://github.com/yourusername/optilab-frontend.git
+ng serve
 ```
 
-Replace `yourusername` with your GitHub username or the appropriate repository path.
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-After cloning, navigate into the project directory:
+## Code scaffolding
+
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
 ```bash
-cd optilab-frontend
+ng generate component component-name
 ```
 
-## Running the Application
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-Follow these steps to build and run the Angular application using Docker Compose:
+```bash
+ng generate --help
+```
 
-1. **Build and start the Docker containers:**
-   ```bash
-   docker-compose up --build
-   ```
+## Building
 
-   This command builds the images and starts the Angular development server. The application will be accessible at [http://localhost:4200](http://localhost:4200).
+To build the project run:
 
-## Running Unit Tests
+```bash
+ng build
+```
 
-To run the unit tests using Docker Compose, follow these steps:
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-1. **Run the tests in a Docker container:**
-   ```bash
-   docker-compose run test
-   ```
+## Running unit tests
 
-   This command will run the unit tests using Jest (or your configured test framework) and display the results in the terminal.
+To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-### Explanation of Services
+```bash
+ng test
+```
 
-- **`angular-app`**: This service builds the Angular application and serves it on port `4200`.
-- **`test`**: This service runs the unit tests defined in the project.
+## Running end-to-end tests
 
-## Project Structure
+For end-to-end (e2e) testing, run:
 
-- **`src/`**: The source code for the Angular application.
-- **`Dockerfile`**: The Docker build configuration.
-- **`docker-compose.yml`**: Docker Compose configuration for easy setup.
-- **`package.json`**: Contains project dependencies and scripts.
+```bash
+ng e2e
+```
 
-## Troubleshooting
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-- If `localhost:4200` is not accessible, ensure the Angular app is configured to bind to `0.0.0.0` by modifying the `start` script in `package.json`:
-  ```json
-  "start": "ng serve --host 0.0.0.0"
-  ```
+## Additional Resources
 
-- Ensure no firewall or security software is blocking Docker from using the exposed port.
-
-
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
