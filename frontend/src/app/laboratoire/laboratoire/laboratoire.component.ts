@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { LaboratoireService, Laboratoire } from '../services/laboratoire.service';
 
 @Component({
-  selector: 'app-laboratoire',
-  templateUrl: './laboratoire.component.html',
-  styleUrls: ['./laboratoire.component.css'],
-  standalone: true,
-  imports: [CommonModule, FormsModule],
+    selector: 'app-laboratoire',
+    templateUrl: './laboratoire.component.html',
+    styleUrls: ['./laboratoire.component.css'],
+    imports: [CommonModule, FormsModule]
 })
 export class LaboratoireComponent implements OnInit {
   laboratoires: Laboratoire[] = [];

@@ -10,11 +10,10 @@ declare global {
 }
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterModule],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    imports: [RouterModule],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'OptiLab';

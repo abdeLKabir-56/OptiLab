@@ -3,11 +3,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-landing',
-  standalone: true,
-  imports: [LoginComponent],
-  templateUrl: './landing.component.html',
-  styleUrl: './landing.component.css'
+    selector: 'app-landing',
+    imports: [LoginComponent],
+    templateUrl: './landing.component.html',
+    styleUrl: './landing.component.css'
 })
 export class LandingComponent {
   isOpenModal=false
