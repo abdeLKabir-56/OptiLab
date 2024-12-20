@@ -8,6 +8,8 @@ module.exports = {
     extend: {},
   },
   plugins: [
+    require("tailwindcss-primeui"),
     require('preline/plugin'),
+    
   ],
 }

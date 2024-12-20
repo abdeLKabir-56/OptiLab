@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { TuiRoot } from "@taiga-ui/core";
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Router, Event, NavigationEnd } from '@angular/router';
+
+
+
 
 import { IStaticMethods } from 'preline/preline';
 declare global {
@@ -11,23 +15,20 @@ declare global {
 
 @Component({
     selector: 'app-root',
-    imports: [RouterModule],
+    imports: [RouterModule, TuiRoot],
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit  {
   title = 'OptiLab';
-  constructor(private router: Router) {
-  
-  }
+  constructor() {
+   
+    }
 
+  
+
+  
   ngOnInit() {
-    this.router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationEnd) {
-        setTimeout(() => {
-          window.HSStaticMethods.autoInit();
-        }, 100);
-      }
-    });
-  }
+    
+}
 }
