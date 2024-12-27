@@ -5,7 +5,7 @@ import { LaboratoireService, Laboratoire } from './laboratoire.service';
 describe('LaboratoireService', () => {
   let service: LaboratoireService;
   let httpMock: HttpTestingController;
-  const baseUrl = 'http://localhost:8050/api/v1/laboratory';
+  const baseUrl = 'http://localhost:8080/api/v1/laboratoires';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -36,7 +36,7 @@ describe('LaboratoireService', () => {
       expect(labs).toEqual(dummyLaboratories);
     });
 
-    const req = httpMock.expectOne(`${baseUrl}/all`);
+    const req = httpMock.expectOne(`${baseUrl}`);
     expect(req.request.method).toBe('GET');
     req.flush(dummyLaboratories);
   });

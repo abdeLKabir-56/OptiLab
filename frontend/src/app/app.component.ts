@@ -1,21 +1,34 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { Router, Event, NavigationEnd } from '@angular/router';
+
+import { IStaticMethods } from 'preline/preline';
+declare global {
+  interface Window {
+    HSStaticMethods: IStaticMethods;
+  }
+}
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    RouterLink,
-    RouterLinkActive
-  ]
+  imports: [RouterModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'OptiLab';
+  constructor(private router: Router) {
   
-  constructor(public router: Router) {}
+  }
+
+  ngOnInit() {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        setTimeout(() => {
+          window.HSStaticMethods.autoInit();
+        }, 100);
+      }
+    });
+  }
 }

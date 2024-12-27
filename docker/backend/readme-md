@@ -1,0 +1,27 @@
+### Why Compile Before Building?
+
+In your CI/CD pipeline, the project undergoes a **compile** step before moving to the **build** process. The reason behind this separation is based on the distinction between "compilation" and "building," particularly in a Java-based project managed with Maven.
+
+### Difference Between Compile and Build
+
+1. **Compile Step**
+   - **Purpose**: The purpose of the `compile` step is to translate your Java source code into bytecode that the Java Virtual Machine (JVM) can execute. This ensures that your code is syntactically correct and can be transformed into executable form.
+   - **Process**: In this stage, the Java source files are checked for errors and converted into `.class` files. The `mvn clean compile` command performs this compilation process.
+   - **Benefits**: Running a separate `compile` step before testing or packaging helps to catch syntax or type errors early. If there are compilation errors, the pipeline fails immediately, preventing further resource wastage in subsequent steps.
+
+2. **Build Step**
+   - **Purpose**: The `build` step (or package step) goes beyond compilation. It bundles the compiled code into distributable formats, such as `.jar` or `.war` files, and includes any necessary resources, dependencies, and configurations for deployment.
+   - **Process**: The `mvn clean package` command takes care of packaging the compiled code, resolving dependencies, running additional tasks (like resource filtering), and preparing the final artifact for deployment or distribution.
+   - **Benefits**: The `build` step creates the complete application package that can be deployed in a production environment or used for further tasks, like creating Docker images.
+
+### Why Not Build Directly?
+
+1. **Efficient Error Detection**: By separating compilation and building, errors can be detected earlier in the pipeline. If the code doesn’t compile, there’s no need to proceed to testing or building.
+2. **Modular Approach**: Keeping steps modular makes the CI/CD pipeline easier to maintain and debug. It separates concerns: compilation, testing, packaging, and deployment.
+3. **Resource Optimization**: Running the `build` step is resource-intensive because it may include dependency resolution, packaging, and even test executions. Compiling first ensures that these resources are not wasted if there are fundamental code errors.
+
+### Summary
+
+- **Compilation** ensures the correctness of your code and produces bytecode.
+- **Building** packages the bytecode into deployable artifacts, making it ready for deployment.
+- By compiling first, you ensure that the code is error-free and only proceed to packaging if compilation is successful.

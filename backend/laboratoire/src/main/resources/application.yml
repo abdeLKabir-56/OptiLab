@@ -2,9 +2,9 @@ spring:
   application:
     name: laboratoire
   datasource:
-    username: 'idhem'
+    username: idhem
     url: jdbc:postgresql://localhost:5432/laboratoire
-    password: 'idhem'
+    password: idhem
   jpa:
     properties:
       hibernate:

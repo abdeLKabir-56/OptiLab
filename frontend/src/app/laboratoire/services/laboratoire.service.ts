@@ -15,12 +15,12 @@ export interface Laboratoire {
   providedIn: 'root'
 })
 export class LaboratoireService {
-  private apiUrl = 'http://localhost:8050/api/v1/laboratory';
+  private apiUrl = 'http://localhost:8080/api/v1/laboratoires';
 
   constructor(private http: HttpClient) {}
 
   getAllLaboratories(): Observable<Laboratoire[]> {
-    return this.http.get<Laboratoire[]>(`${this.apiUrl}/all`);
+    return this.http.get<Laboratoire[]>(`${this.apiUrl}`);
   }
 
   createLaboratory(item: Laboratoire): Observable<Laboratoire> {
