@@ -5,8 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/OptiLab.iml" filepath="$PROJECT_DIR$/.idea/OptiLab.iml" />
       <module fileurl="file://$PROJECT_DIR$/backend/services/config-server/config-server.iml" filepath="$PROJECT_DIR$/backend/services/config-server/config-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/backend/services/discovery/discovery.iml" filepath="$PROJECT_DIR$/backend/services/discovery/discovery.iml" />
-      <module fileurl="file://$PROJECT_DIR$/backend/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/backend/eureka-server/eureka-server.iml" />
-      <module fileurl="file://$PROJECT_DIR$/backend/laboratoire/laboratoire.iml" filepath="$PROJECT_DIR$/backend/laboratoire/laboratoire.iml" />
     </modules>
   </component>
 </project>
