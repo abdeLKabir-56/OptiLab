@@ -3,7 +3,7 @@ import { LaboratoireComponent } from './laboratoire.component';
 import { LaboratoireService } from '../services/laboratoire.service';
 import { of } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
+import { RouterTestingModule } from '@angular/router/testing'; 
 interface Laboratoire {
   id: number;
   nom: string;
@@ -28,7 +28,7 @@ describe('LaboratoireComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [LaboratoireComponent, HttpClientTestingModule],
+      imports: [LaboratoireComponent, HttpClientTestingModule,RouterTestingModule],
       providers: [
         { provide: LaboratoireService, useValue: spy }
       ]
@@ -84,7 +84,6 @@ describe('LaboratoireComponent', () => {
       expect(laboratoireService.createLaboratory).toHaveBeenCalledWith(newLaboratory);
     });
   }));
-  
   it('should delete a laboratory', () => {
     component.laboratoires = [{
       id: 1,
