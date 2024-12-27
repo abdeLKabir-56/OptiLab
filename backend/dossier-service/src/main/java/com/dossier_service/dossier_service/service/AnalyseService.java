@@ -22,12 +22,12 @@ public class AnalyseService {
         return analyseRepository.findAll();
     }
 
-    public Analyse getAnalyseById(String  id) {
+    public Analyse getAnalyseById(Long  id) {
         return analyseRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Analyse not found with ID: " + id));
     }
 
-    public Analyse updateAnalyse(String  id, Analyse updatedAnalyse) {
+    public Analyse updateAnalyse(Long id, Analyse updatedAnalyse) {
         return analyseRepository.findById(id)
                 .map(analyse -> {
                     analyse.setNom(updatedAnalyse.getNom());
@@ -39,7 +39,7 @@ public class AnalyseService {
                 .orElseThrow(() -> new ResourceNotFoundException("Analyse not found with ID: " + id));
     }
 
-    public void deleteAnalyse(String  id) {
+    public void deleteAnalyse(Long  id) {
         if (!analyseRepository.existsById(id)) {
             throw new ResourceNotFoundException("Analyse not found with ID: " + id);
         }

@@ -19,8 +19,9 @@ import java.util.UUID;
 public class Dossier {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String  id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long  id;
+
     private String fkEmailUtilisateur;
     private String  fkIdPatient;
     private LocalDate date;
