@@ -1,8 +1,11 @@
-<main class="min-h-screen grid md:grid-cols-[auto,1fr] grid-cols-[1fr] grid-rows-[1fr] gap-3   border border-slate-500">
+<section class="min-h-screen grid md:grid-cols-[auto,1fr] grid-cols-[1fr] grid-rows-[1fr] gap-2  ">
 
-<div class="col-start-2 col-end-3 row-start-1 row-end-2 ">Main</div>
-<app-sider class="col-start-1 col-end-2 row-start-1 row-end-2 border border-red-300 md:w-[268px]  flex flex-col justify-start items-center">
-
+<div class="col-start-2 col-end-3 row-start-1 row-end-2 border border-red-200  ">
+  <app-header  (toggle)="toggleMenu()"></app-header>
+  <router-outlet ></router-outlet>
+    
+  </div>
+<app-sider [collapsedStatus]="collapsed" [class.md:w-[80px]]="collapsed"  class="col-start-1 col-end-2 row-start-1 row-end-2 border-slate-200 border-r-[1px] md:w-[268px]  flex flex-col justify-start items-center transition-all ease-in-out duration-700 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
 </app-sider>
 
-</main>
+</section>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
 import { SiderComponent } from '../../components/sider/sider.component';
 import { RouterModule } from '@angular/router';
@@ -10,5 +10,8 @@ import { RouterModule } from '@angular/router';
     styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-
+    collapsed=false
+ toggleMenu(){
+ this.collapsed=!this.collapsed
+ }
 }

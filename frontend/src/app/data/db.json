@@ -1,0 +1,124 @@
+{
+  "products": [
+    {
+      "id": "1000",
+      "code": "f230fh0g3",
+      "name": "Bamboo Watch",
+      "description": "Elegant bamboo-crafted watch.",
+      "image": "bamboo-watch.jpg",
+      "price": 65,
+      "category": "Accessories",
+      "quantity": 24,
+      "inventoryStatus": "INSTOCK",
+      "rating": 5
+    },
+    {
+      "id": "1001",
+      "code": "nvklal433",
+      "name": "Black Sneakers",
+      "description": "Stylish black sneakers for everyday use.",
+      "image": "black-sneakers.jpg",
+      "price": 80,
+      "category": "Shoes",
+      "quantity": 15,
+      "inventoryStatus": "OUTOFSTOCK",
+      "rating": 4
+    },
+    {
+      "id": "1002",
+      "code": "zz21cz3c1",
+      "name": "Blue T-Shirt",
+      "description": "Comfortable and casual blue t-shirt.",
+      "image": "blue-tshirt.jpg",
+      "price": 20,
+      "category": "Clothing",
+      "quantity": 50,
+      "inventoryStatus": "INSTOCK",
+      "rating": 4
+    },
+    {
+      "id": "1003",
+      "code": "244wgerg2",
+      "name": "Gaming Headset",
+      "description": "High-quality gaming headset with surround sound.",
+      "image": "gaming-headset.jpg",
+      "price": 120,
+      "category": "Electronics",
+      "quantity": 8,
+      "inventoryStatus": "LOWSTOCK",
+      "rating": 5
+    },
+    {
+      "id": "1004",
+      "code": "h456wer53",
+      "name": "Leather Wallet",
+      "description": "Premium leather wallet with multiple compartments.",
+      "image": "leather-wallet.jpg",
+      "price": 35,
+      "category": "Accessories",
+      "quantity": 25,
+      "inventoryStatus": "INSTOCK",
+      "rating": 4
+    },
+    {
+      "id": "1005",
+      "code": "avc123drt",
+      "name": "Smartphone Case",
+      "description": "Durable and stylish smartphone case.",
+      "image": "smartphone-case.jpg",
+      "price": 15,
+      "category": "Accessories",
+      "quantity": 100,
+      "inventoryStatus": "INSTOCK",
+      "rating": 3
+    },
+    {
+      "id": "1006",
+      "code": "ghr567sdf",
+      "name": "Fitness Band",
+      "description": "Track your fitness activities with precision.",
+      "image": "fitness-band.jpg",
+      "price": 50,
+      "category": "Electronics",
+      "quantity": 30,
+      "inventoryStatus": "INSTOCK",
+      "rating": 4
+    },
+    {
+      "id": "1007",
+      "code": "ert45df34",
+      "name": "Desk Lamp",
+      "description": "Modern desk lamp with adjustable brightness.",
+      "image": "desk-lamp.jpg",
+      "price": 40,
+      "category": "Home Decor",
+      "quantity": 20,
+      "inventoryStatus": "INSTOCK",
+      "rating": 5
+    },
+    {
+      "id": "1008",
+      "code": "plk56mnh7",
+      "name": "Wireless Mouse",
+      "description": "Ergonomic wireless mouse with long battery life.",
+      "image": "wireless-mouse.jpg",
+      "price": 25,
+      "category": "Electronics",
+      "quantity": 60,
+      "inventoryStatus": "INSTOCK",
+      "rating": 4
+    },
+    {
+      "id": "1009",
+      "code": "wer78cv21",
+      "name": "Travel Backpack",
+      "description": "Spacious and durable backpack for travel and daily use.",
+      "image": "travel-backpack.jpg",
+      "price": 70,
+      "category": "Accessories",
+      "quantity": 10,
+      "inventoryStatus": "LOWSTOCK",
+      "rating": 5
+    }
+  ]
+}

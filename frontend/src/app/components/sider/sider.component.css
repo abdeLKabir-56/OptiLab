@@ -1,7 +1,8 @@
 /* Target the scrollbar */
 ::-webkit-scrollbar {
-  width: 7px; /* Width of the scrollbar */
-  height: 12px; /* Height of the scrollbar (for horizontal scrollbars) */
+  width: 4px; /* Width of the scrollbar */
+  height: 12px;
+  padding:2px /* Height of the scrollbar (for horizontal scrollbars) */
 }
 
 /* Style the track (background) */

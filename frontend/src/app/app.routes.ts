@@ -6,6 +6,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LaboratoireComponent } from './laboratoire/laboratoire/laboratoire.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { MainDashboardComponent } from './pages/main-dashboard/main-dashboard.component';
+import { LabosComponent } from './pages/labos/labos.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,7 @@ export const routes: Routes = [
     title: 'Dashboard',
     children: [
       { path: '', component: MainDashboardComponent, title: 'OptiLab - Home' },
+      { path: 'labos', component: LabosComponent, title: 'OptiLab - Home' },
     ]
   },
   { path: '**', redirectTo: '/home' }, // Fallback for unknown routes
