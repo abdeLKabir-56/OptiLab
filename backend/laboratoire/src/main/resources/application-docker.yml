@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: laboratoire
+  datasource:
+    url: jdbc:postgresql://postgres2:5432/laboratoire  # Matches the hostname and port defined in docker-compose
+    username: idhem
+    password: idhem
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+      format_sql: 'true'
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8080  # Port defined in docker-compose for the laboratoire service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka  # Points to the eureka-server container
+  instance:
+    prefer-ip-address: true
+    hostname: laboratoire  # Optional, helps with identifying the service in Eureka
+

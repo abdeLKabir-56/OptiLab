@@ -2,6 +2,13 @@ server:
   port: 8082
 
 spring:
+  mail:
+    host: smtp.example.com
+    port: 587
+    username: abdelkabirelhamoussi@gamil.com
+    password: your-email-password
+    protocol: smtp
+    tls: true
   cloud:
     discovery:
       enabled: true
@@ -23,5 +30,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
 
 
