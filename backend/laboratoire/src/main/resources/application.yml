@@ -5,9 +5,9 @@ spring:
     base-url: http://localhost:9411
 
   datasource:
-    username: 'elmehdi'
-    url: jdbc:postgresql://localhost:5432/laboratoire
-    password: 'elmehdi'
+    username: 'idhem'
+    url: jdbc:postgresql://localhost:5432/laboratoires
+    password: 'idhem'
   jpa:
     properties:
       hibernate:
@@ -23,4 +23,5 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+    enabled: true
 

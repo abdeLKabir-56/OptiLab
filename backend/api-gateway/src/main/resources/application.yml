@@ -11,6 +11,14 @@ spring:
           uri: lb://LABORATOIRE
           predicates:
             - Path=/api/v1/laboratoires/**
+        - id: contact
+          uri: lb://LABORATOIRE
+          predicates:
+            - Path=/api/v1/contacts-laboratoire/**
+        - id: address
+          uri: lb://LABORATOIRE
+          predicates:
+            - Path=/api/v1/adresses/**
 server:
   port: 8888
 
