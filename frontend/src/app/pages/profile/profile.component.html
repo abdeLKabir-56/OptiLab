@@ -1,5 +1,5 @@
 <h1 class="font-bold text-4xl ml-8">Profile</h1>
-<main class="flex justify-center items-center  px-16 mt-20">
+<main class="flex justify-center items-center px-16 mt-20">
   
 <div class="w-[90%] shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col items-center justify-center min-h-96 relative gap-1">
   <div class="absolute -top-24 left-1/2 -translate-x-1/2 ">
@@ -15,11 +15,11 @@
 <h2 class="text-[#2a3547] font-normal">{{'mail@x.com'}}</h2>
 <h3 class="text-[#2a3547] font-normal">Phone number</h3>
 
-  <p-button (click)="showDialog()" styleClass="!w-[400px] mt-8" size="large" label="Edit profile Infos" variant="outlined" severity="help" />
+  <p-button (click)="showDialog()" styleClass="!w-[400px] mt-8" size="large" label="Send" variant="outlined" severity="help" />
 
 </div>
 </main>
-<p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '25rem' }">
+<p-dialog [(visible)]="visible"  [style]="{ width: '25rem' }">
     <ng-template #header>
         <div class="inline-flex items-center justify-center gap-2">
             <p-avatar image="https://tecdn.b-cdn.net/img/new/avatars/2.jpg" shape="circle" />

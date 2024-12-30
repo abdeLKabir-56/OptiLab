@@ -1,0 +1,15 @@
+<h1 class="font-bold text-2xl ml-8">Download Your Medical Folders</h1>
+<main class="flex flex-wrap  mt-4 p-6 gap-4">
+  <p-card *ngFor="let number of numbers" [style]="{ width: '10rem',height:'18rem', overflow: 'hidden' }">
+    <ng-template #header>
+        <img  alt="Card" class="w-full  " src="../../../assets/online-doctor-folder-file-medical-information-care-flat-style-icon-free-vector-removebg-preview.png" />
+    </ng-template>
+    <ng-template #title>202{{number}}</ng-template>
+    <ng-template #footer>
+        <div class="flex gap-4 mt-1">
+            <p-button severity="help" icon="pi pi-home" label="Download" class="w-full" styleClass="w-full" />
+        </div>
+    </ng-template>
+</p-card>
+</main>
+  
