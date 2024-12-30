@@ -1,7 +1,7 @@
 <section class="min-h-screen grid md:grid-cols-[auto,1fr] grid-cols-[1fr] grid-rows-[1fr] gap-2">
   <!-- Main Content Section -->
   <div [class.md:ml-[80px]]="collapsed" class="col-start-2 col-end-3 row-start-1 row-end-2 border border-red-200 md:ml-[268px] transition-all ease-in-out duration-600">
-    <app-header  (toggle)="toggleMenu()"></app-header>
+    <app-header  (openDialog)="toggleVisibility()" (toggle)="toggleMenu()"></app-header>
     <router-outlet></router-outlet>
   </div>
 
@@ -11,5 +11,7 @@
   </app-sider>
 
   <!-- Profile According Component, Only shown if isVisible is true -->
- 
+  <div *ngIf="isVisible" (hideDialog)="hide()">
+    <app-profile-according></app-profile-according>
+  </div>
 </section>

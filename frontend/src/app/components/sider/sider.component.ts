@@ -17,5 +17,7 @@ import { RouterModule } from '@angular/router';
 })
 export class SiderComponent {
     @Input() collapsedStatus!:boolean
+    @Input() isUser!:boolean
+    
   
 }

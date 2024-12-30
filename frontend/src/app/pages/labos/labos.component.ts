@@ -40,7 +40,7 @@ interface ExportColumn {
     selector: 'app-labos',
     templateUrl: './labos.component.html',
     standalone: true,
-    imports: [TableModule, Dialog, Ripple, SelectModule, ToastModule, ToolbarModule, ConfirmDialog, InputTextModule, TextareaModule, CommonModule, FileUpload, DropdownModule, Tag, RadioButton, Rating, InputTextModule, FormsModule, InputNumber, IconFieldModule, InputIconModule , ButtonModule],
+    imports: [TableModule, Dialog, SelectModule, ToastModule, ToolbarModule, ConfirmDialog, InputTextModule, TextareaModule, CommonModule, FileUpload, DropdownModule, Tag, RadioButton, Rating, InputTextModule, FormsModule, InputNumber, IconFieldModule, InputIconModule , ButtonModule],
     providers: [MessageService, ConfirmationService, ApiService],
     styles: [
         `:host ::ng-deep .p-dialog .product-image {
@@ -144,21 +144,27 @@ export class LabosComponent implements OnInit{
     }
 
     deleteProduct(product: Product) {
-        this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + product.name + '?',
-            header: 'Confirm',
-            icon: 'pi pi-exclamation-triangle',
-            accept: () => {
-                this.products = this.products.filter((val) => val.id !== product.id);
-                this.product = {} as Product;
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Product Deleted',
-                    life: 3000
+        this.productService.deleteProduct(product.id).subscribe({
+            next:()=>{
+                this.confirmationService.confirm({
+                    message: 'Are you sure you want to delete ' + product.name + '?',
+                    header: 'Confirm',
+                    icon: 'pi pi-exclamation-triangle',
+                    accept: () => {
+                        this.products = this.products.filter((val) => val.id !== product.id);
+                        this.product = {} as Product;
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Successful',
+                            detail: 'Product Deleted',
+                            life: 3000
+                        });
+                    }
                 });
-            }
-        });
+            },
+            error:()=>console.log("Cannot delete")
+        })
+        
     }
 
     findIndexById(id: string): number {

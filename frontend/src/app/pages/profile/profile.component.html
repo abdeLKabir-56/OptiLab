@@ -1,0 +1,54 @@
+<h1 class="font-bold text-4xl ml-8">Profile</h1>
+<main class="flex justify-center items-center  px-16 mt-20">
+  
+<div class="w-[90%] shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col items-center justify-center min-h-96 relative gap-1">
+  <div class="absolute -top-24 left-1/2 -translate-x-1/2 ">
+    <img
+  src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
+  class="rounded-full shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] "
+  style="height: 150px; width: 150px"
+  alt=""
+  loading="lazy" />
+  </div>
+<h1 class="text-[#2a3547] font-bold text-4xl">Name full ,Age</h1>
+<h2 class="text-[#2a3547] font-normal">City , Full Adress</h2>
+<h2 class="text-[#2a3547] font-normal">{{'mail@x.com'}}</h2>
+<h3 class="text-[#2a3547] font-normal">Phone number</h3>
+
+  <p-button (click)="showDialog()" styleClass="!w-[400px] mt-8" size="large" label="Edit profile Infos" variant="outlined" severity="help" />
+
+</div>
+</main>
+<p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '25rem' }">
+    <ng-template #header>
+        <div class="inline-flex items-center justify-center gap-2">
+            <p-avatar image="https://tecdn.b-cdn.net/img/new/avatars/2.jpg" shape="circle" />
+            <span class="font-bold whitespace-nowrap">Amy Elsner</span>
+        </div>
+    </ng-template>
+    <span class="text-surface-500 dark:text-surface-400 block mb-8">Update your information.</span>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="First Name" class="font-semibold w-24">First Name</label>
+        <input pInputText id="First Name" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex items-center gap-4 mb-2">
+        <label for="Last Name" class="font-semibold w-24">Last Name</label>
+        <input pInputText id="Last Name" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex items-center gap-4 mb-2">
+      <label for="email" class="font-semibold w-24">Email</label>
+      <input pInputText id="email" class="flex-auto" autocomplete="off" />
+  </div>
+  <div class="flex items-center gap-4 mb-2">
+    <label for="adress" class="font-semibold w-24">Adress</label>
+    <input pInputText id="adress" class="flex-auto" autocomplete="off" />
+</div>
+<div class="flex items-center gap-4 mb-2">
+  <label for="phone" class="font-semibold w-24">Phone number</label>
+  <input pInputText id="phone" class="flex-auto" autocomplete="off" />
+</div>
+    <ng-template #footer>
+        <p-button label="Cancel" [text]="true" severity="secondary" (click)="visible = false" />
+        <p-button label="Save" [outlined]="true" severity="secondary" (click)="visible = false" />
+    </ng-template>
+</p-dialog>

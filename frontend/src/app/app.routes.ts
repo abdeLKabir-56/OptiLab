@@ -7,6 +7,8 @@ import { LaboratoireComponent } from './laboratoire/laboratoire/laboratoire.comp
 import { AuthGuard } from './core/guards/auth.guard';
 import { MainDashboardComponent } from './pages/main-dashboard/main-dashboard.component';
 import { LabosComponent } from './pages/labos/labos.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { UserPortalComponent } from './pages/user-portal/user-portal.component';
 
 export const routes: Routes = [
   {
@@ -15,7 +17,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: LandingComponent, title: 'OptiLab - Home' },
-      { path: 'laboratoires', component: LaboratoireComponent, title: 'Laboratories Management' },
+      { path: 'laboratoires', component: LaboratoireComponent, title: 'Laboratories Management'},
     ]
   },
   {
@@ -25,7 +27,16 @@ export const routes: Routes = [
     title: 'Dashboard',
     children: [
       { path: '', component: MainDashboardComponent, title: 'OptiLab - Home' },
-      { path: 'labos', component: LabosComponent, title: 'OptiLab - Home' },
+      { path: 'labos', component: LabosComponent, title: 'OptiLab - Home' }    ]
+  },
+  {
+    path: 'user',
+    component: UserPortalComponent, // Separate layout
+    canActivate: [AuthGuard],
+    title: 'user',
+    children: [
+      { path: '', redirectTo: '/user/profile', pathMatch: 'full' },
+     { path: 'profile', component: ProfileComponent, title: 'OptiLab - Home' },
     ]
   },
   { path: '**', redirectTo: '/home' }, // Fallback for unknown routes

@@ -7,7 +7,6 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require('tailwindcss-primeui'),
-    
+    require('tailwindcss-primeui') 
   ],
 }

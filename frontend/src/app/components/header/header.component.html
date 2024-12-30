@@ -56,7 +56,7 @@
             class="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
             href="#"
             data-twe-nav-link-ref
-            >Team</a
+            >laboratories</a
           >
         </li>
         <!-- Projects link -->
@@ -65,7 +65,7 @@
             class="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
             href="#"
             data-twe-nav-link-ref
-            >Projects</a
+            >Techniciens</a
           >
         </li>
       </ul>
@@ -157,9 +157,8 @@
         data-twe-dropdown-ref
         data-twe-dropdown-alignment="end">
         <!-- Second dropdown trigger -->
-        <a
+        <a appClickOutside  (clickOutside)="hideIt()"  (click)="toggleDialog()"
           class="flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
-          href="#"
           id="dropdownMenuButton2"
           role="button"
           data-twe-dropdown-toggle-ref
