@@ -122,4 +122,8 @@ public class ContactLaboratoireService {
                 .message("Contact Laboratory deleted Successfully")
                 .build();
     }
+
+    public ContactLaboratoire getContactLaboratoireByLaboId(Long laboId) {
+        return this.contactLaboratoireRepository.findByLaboratoireId(laboId).orElseThrow(() -> new RuntimeException("Contact labo not found"));
+    }
 }

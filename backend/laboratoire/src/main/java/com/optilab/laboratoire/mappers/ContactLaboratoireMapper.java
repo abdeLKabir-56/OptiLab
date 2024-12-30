@@ -2,6 +2,7 @@ package com.optilab.laboratoire.mappers;
 
 import com.optilab.laboratoire.DTO.request.ContactLaboratoireAdresseRequest;
 import com.optilab.laboratoire.DTO.request.ContactLaboratoireRequest;
+import com.optilab.laboratoire.DTO.request.LaboratoireRequest;
 import com.optilab.laboratoire.DTO.response.ContactLaboratoireResponse;
 import com.optilab.laboratoire.entities.ContactLaboratoire;
 import org.mapstruct.Mapper;
@@ -17,4 +18,5 @@ public interface ContactLaboratoireMapper {
     @Mapping(target = "laboName", source = "contactLaboratoire.laboratoire.nom")
     ContactLaboratoireResponse toResponse(ContactLaboratoire contactLaboratoire);
     ContactLaboratoireRequest toRequest(ContactLaboratoireAdresseRequest contactLaboratoireAdresseRequest);
+    ContactLaboratoireAdresseRequest toRequestFromLaboratoireRequest(LaboratoireRequest laboratoireRequest);
 }

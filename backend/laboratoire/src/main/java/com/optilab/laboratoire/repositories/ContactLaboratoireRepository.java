@@ -4,7 +4,6 @@ import com.optilab.laboratoire.entities.ContactLaboratoire;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface ContactLaboratoireRepository extends JpaRepository<ContactLaboratoire, Long> {
@@ -13,4 +12,5 @@ public interface ContactLaboratoireRepository extends JpaRepository<ContactLabor
             "SELECT cl FROM ContactLaboratoire cl WHERE cl.adresse.id = :adresseId"
     )
     ContactLaboratoire findByAdresseId(Long adresseId);
+    Optional<ContactLaboratoire> findByLaboratoireId(Long laboratoireId);
 }

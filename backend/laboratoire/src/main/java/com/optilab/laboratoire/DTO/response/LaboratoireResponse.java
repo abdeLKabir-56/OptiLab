@@ -11,6 +11,8 @@ public record LaboratoireResponse(
         String logo,
         Long nrc,
         boolean active,
-        LocalDate dateActivation
+        LocalDate dateActivation,
+        Long adresseId,
+        Long contactLaboratoirId
 ) {
 }

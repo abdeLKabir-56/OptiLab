@@ -40,4 +40,10 @@ public class AdresseContactLaboratoireUtilService {
         this.adresseRepository.delete(adresse);
     }
 
+    public ContactLaboratoire saveContactLabo(ContactLaboratoire contactLaboratoire) {
+        return this.contactLaboratoireRepository.save(contactLaboratoire);
+    }
+
+
+
 }
