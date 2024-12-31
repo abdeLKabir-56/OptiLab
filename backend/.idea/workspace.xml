@@ -5,26 +5,74 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d0a4235-50d9-47dc-a191-6b4c8b446918" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dossier-service/src/main/resources/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication-service/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/ars/authservice/config/KeycloakRealm/realm-export.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/ars/authservice/AuthServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/ars/authservice/AuthServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/ars/authservice/config/auth/WebSecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/ars/authservice/config/auth/WebSecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/ars/authservice/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/ars/authservice/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/ars/authservice/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/ars/authservice/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/HELP.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/AuthentificationApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Config/CustomAccessDenied.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Config/CustomAuthenticationEntryPoint.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Config/RedisConfig/RedisClientConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Config/RedisConfig/RedisClientConnection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Config/RedisConfig/SessionStorage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Config/WebSecurityConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Controller/AuthentificationController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Controller/HomeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/DTO/BaseResponseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/DTO/LoginRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/DTO/TokenDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Service/AuthService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Util/KeycloakJwtRolesConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/resources/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/test/java/com/authentification/AuthentificationApplicationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/test/java/com/authentification/authentification/AuthentificationApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/AuthController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/AuthentificationApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/Config/CustomAccessDenied.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/Config/CustomAuthenticationEntryPoint.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/Config/RedisConfig/RedisClientConfiguration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/Config/RedisConfig/RedisClientConnection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/Config/RedisConfig/SessionStorage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/Config/WebSecurityConfiguration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/Controller/AuthentificationController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/Controller/HomeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/DTO/BaseResponseDto$BaseResponseDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/DTO/BaseResponseDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/DTO/LoginRequestDto$LoginRequestDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/DTO/LoginRequestDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/DTO/TokenDto$TokenDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/DTO/TokenDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/GlobalExceptionHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/SecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/Service/AuthService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/Util/KeycloakJwtRolesConverter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dossier-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/DossierServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/DossierServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/controller/EmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/controller/ExamenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/controller/ExamenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/dto/ExamenDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/dto/ExamenDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/dto/NotificationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/dto/NotificationDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Analyse.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Analyse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Dossier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Dossier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Epreuve.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Epreuve.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Examen.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Examen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/kafka/KafkaConsumerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/kafka/KafkaConsumerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/AnalyseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/AnalyseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/DossierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/DossierService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/EpreuveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/EpreuveService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/ExamenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/ExamenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/util/ExamenMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/util/ExamenMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,11 +84,12 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/authentication-service" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -61,38 +110,47 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.AuthentificationApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.DossierServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.LaboratoireApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Merging backend&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/info/Desktop/Stage_pfa_project/kafka-example&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ApiGatewayApplication.executor": "Run",
+    "Spring Boot.AuthServiceApplication.executor": "Run",
+    "Spring Boot.AuthentificationApplication.executor": "Run",
+    "Spring Boot.DossierServiceApplication.executor": "Run",
+    "Spring Boot.EurekaServerApplication.executor": "Run",
+    "Spring Boot.LaboratoireApplication.executor": "Run",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/info/Desktop/OptiLab/backend/authentication-service/pom.xml",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.dossier_service.dossier_service.repository" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.authentification" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -104,11 +162,29 @@
         <option value="SpringBootApplicationConfigurationType" />
       </set>
     </option>
+    <option name="hiddenConfigurations">
+      <map>
+        <entry key="SpringBootApplicationConfigurationType">
+          <value>
+            <set>
+              <option value="AuthentificationApplication" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.DossierServiceApplication">
+  <component name="RunManager" selected="Spring Boot.AuthServiceApplication">
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.optilab.apigateway.ApiGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="auth-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ars.authservice.AuthServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -142,6 +218,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Spring Boot.AuthServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.DossierServiceApplication" />
       <item itemvalue="Spring Boot.AuthentificationApplication" />
@@ -176,7 +253,8 @@
       <workItem from="1735570476960" duration="93000" />
       <workItem from="1735574025289" duration="8097000" />
       <workItem from="1735583346590" duration="1433000" />
-      <workItem from="1735654614774" duration="877000" />
+      <workItem from="1735654614774" duration="9926000" />
+      <workItem from="1735670331645" duration="7190000" />
     </task>
     <servers />
   </component>
