@@ -108,5 +108,115 @@
       "inventoryStatus": "LOWSTOCK",
       "rating": 5
     }
+  ] , 
+  "analysis":[
+    {
+      "id": "10",
+      "laboratoire": "Rayssoni",
+      "nom": "Sang complet",
+      "description": "Analyse sanguine.",
+      "status": "resolved",
+      "epreuves": [
+        {
+          "id": "100",
+          "nom": "Numération globules blancs",
+          "examen": {
+            "resultat": "Positive",
+            "observations": "Detailed observations"
+          }
+        },
+        {
+          "id": "101",
+          "nom": "Hémoglobine",
+          "examen": {
+            "resultat": "Positive",
+            "observations": "Detailed observations"
+          }
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "laboratoire": "LabExpert",
+      "nom": "Biochimie",
+      "description": "Analyse biochimique.",
+      "status": "pending",
+      "epreuves": [
+        {
+          "id": "200",
+          "nom": "Glucose sanguin",
+          "examen": {
+            "resultat": null,
+            "observations": "À jeun, valeur normale"
+          }
+        },
+        {
+          "id": "201",
+          "nom": "Cholestérol",
+          "examen": {
+            "resultat": "Élevé",
+            "observations": "Recommander une alimentation équilibrée"
+          }
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "laboratoire": "Medilab",
+      "nom": "Microbiologie",
+      "description": "Analyse microbiologique.",
+      "status": "pending",
+      "epreuves": [
+        {
+          "id": "300",
+          "nom": "Culture bactérienne",
+          "examen": {
+            "resultat": "Présence de streptocoque",
+            "observations": null
+          }
+        },
+        {
+          "id": "301",
+          "nom": "Antibiogramme",
+          "examen": {
+            "resultat": null,
+            "observations": "Traitement recommandé"
+          }
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "laboratoire": "BioDiag",
+      "nom": "Hormonologie",
+      "description": "Analyse hormonale.",
+      "status": "resolved",
+      "epreuves": [
+        {
+          "id": "400",
+          "nom": "TSH",
+          "examen": {
+            "resultat": "Normale",
+            "observations": "Valeur dans la plage normale"
+          }
+        },
+        {
+          "id": "401",
+          "nom": "Cortisol",
+          "examen": {
+            "resultat": "Bas",
+            "observations": "Hypocortisolisme suspecté"
+          }
+        },
+        {
+          "id": "402",
+          "nom": "Prolactine",
+          "examen": {
+            "resultat": "Élevé",
+            "observations": "Hyperprolactinémie détectée"
+          }
+        }
+      ]
+    }
   ]
 }

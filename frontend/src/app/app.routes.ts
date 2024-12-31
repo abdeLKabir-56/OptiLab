@@ -11,6 +11,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { UserPortalComponent } from './pages/user-portal/user-portal.component';
 import { SupportMessageComponent } from './pages/support-message/support-message.component';
 import { MedicalFolderComponent } from './pages/medical-folder/medical-folder.component';
+import { AnalysisComponent } from './pages/analysis/analysis.component';
 
 export const routes: Routes = [
   {
@@ -37,10 +38,11 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     title: 'user',
     children: [
-      { path: '', redirectTo: '/user/profile', pathMatch: 'full' },
+      { path: '', redirectTo: '/user/profile', pathMatch: 'full'},
      { path: 'profile', component: ProfileComponent },
      {path: 'support' , component:SupportMessageComponent},
-     {path: 'folders' , component:MedicalFolderComponent}
+     {path: 'folders' , component:MedicalFolderComponent},
+     {path: 'analysis' , component:AnalysisComponent}
     ]
   },
   { path: '**', redirectTo: '/home' }, // Fallback for unknown routes
