@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .email-header {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+        .email-body {
+            padding: 20px;
+        }
+        .email-body h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .email-body p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .email-footer {
+            background-color: #f4f4f9;
+            color: #777;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <!-- Header Section -->
+    <div class="email-header">
+        <h1>Notification Service</h1>
+    </div>
+
+    <!-- Body Section -->
+    <div class="email-body">
+        <h1>Hello, {{recipientName}}!</h1>
+        <p>
+            This is a notification regarding your recent activity on our platform. Please see the details below:
+        </p>
+        <p>
+            <strong>Type:</strong> {{notificationType}}<br>
+            <strong>Details:</strong> {{notificationDetails}}<br>
+        </p>
+        <p>
+            If you have any questions, feel free to contact us at <a href="mailto:support@example.com">support@example.com</a>.
+        </p>
+        <p>Best regards,<br>The Notification Team</p>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="email-footer">
+        &copy; {{currentYear}} Notification Service. All rights reserved.
+    </div>
+</div>
+</body>
+</html>

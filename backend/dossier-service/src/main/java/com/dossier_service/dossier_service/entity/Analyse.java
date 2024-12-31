@@ -1,18 +1,20 @@
 package com.dossier_service.dossier_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Table(name = "\"analyse\"")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "analyse", schema = "public")
 public class Analyse {
 
     @Id
@@ -22,9 +24,16 @@ public class Analyse {
     private String fkIdLaboratoire;
     private String nom;
     private String description;
+    private String status;
+    private LocalDate date;
 
-    // One-to-many relationship with Epreuve
-    @OneToMany(mappedBy = "analyse", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private List<Epreuve> epreuves; // mappedBy should refer to 'analyse' in the Epreuve entity
+    @ManyToOne
+    @JoinColumn(name = "dossier_id", nullable = false)
+    @JsonBackReference // Prevents recursive serialization back to the parent Dossier
+    private Dossier dossier;
+
+    @OneToMany(mappedBy = "analyse", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference // Ensures proper serialization of the relationship
+    private List<Epreuve> epreuves;
 }
+
