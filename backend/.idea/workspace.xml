@@ -5,26 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d0a4235-50d9-47dc-a191-6b4c8b446918" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dossier-service/src/main/resources/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Config/CustomAccessDenied.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Config/CustomAuthenticationEntryPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Config/RedisConfig/RedisClientConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Config/RedisConfig/RedisClientConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Config/RedisConfig/SessionStorage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Config/WebSecurityConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Controller/AuthentificationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Controller/HomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/DTO/BaseResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/DTO/LoginRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/DTO/TokenDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Service/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/Util/KeycloakJwtRolesConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/main/resources/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentification/src/test/java/com/authentification/AuthentificationApplicationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/DossierServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/DossierServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/controller/EmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/controller/ExamenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/controller/ExamenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/dto/ExamenDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/dto/ExamenDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/dto/NotificationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/dto/NotificationDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Analyse.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Analyse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Dossier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Dossier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Epreuve.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Epreuve.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Examen.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/entity/Examen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/kafka/KafkaConsumerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/kafka/KafkaConsumerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/AnalyseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/AnalyseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/DossierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/DossierService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/EpreuveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/EpreuveService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/ExamenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/service/ExamenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/util/ExamenMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/java/com/dossier_service/dossier_service/util/ExamenMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dossier-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/dossier-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/authentification/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/AuthentificationApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/AuthentificationApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/GlobalExceptionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/java/com/authentification/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/authentification/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/authentification/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/target/classes/com/authentification/AuthentificationApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/authentification/target/classes/com/authentification/AuthentificationApplication.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +42,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -61,38 +68,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.AuthentificationApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.DossierServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.LaboratoireApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Merging backend&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/info/Desktop/Stage_pfa_project/kafka-example&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ApiGatewayApplication.executor": "Run",
+    "Spring Boot.AuthentificationApplication.executor": "Run",
+    "Spring Boot.DossierServiceApplication.executor": "Run",
+    "Spring Boot.EurekaServerApplication.executor": "Run",
+    "Spring Boot.LaboratoireApplication.executor": "Run",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "backend",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/info/Desktop/Stage_pfa_project/kafka-example",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.dossier_service.dossier_service.repository" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.authentification" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -105,7 +120,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.DossierServiceApplication">
+  <component name="RunManager" selected="Spring Boot.AuthentificationApplication">
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.optilab.apigateway.ApiGatewayApplication" />
@@ -176,7 +191,7 @@
       <workItem from="1735570476960" duration="93000" />
       <workItem from="1735574025289" duration="8097000" />
       <workItem from="1735583346590" duration="1433000" />
-      <workItem from="1735654614774" duration="877000" />
+      <workItem from="1735654614774" duration="9768000" />
     </task>
     <servers />
   </component>
