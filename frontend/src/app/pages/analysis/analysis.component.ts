@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AnalysisComponent {
   analyses:Analyse[]=[]
+  
   constructor(private analyseService:AnalysisService){
 
   }
@@ -40,6 +41,10 @@ export class AnalysisComponent {
           return 'warn'
     }
 }
+
+ isAvaible(analyse:Analyse){
+  return analyse.status=='resolved'
+ }
 
 generateAnalysisPdf(analyse:Analyse) {
   const doc = new jsPDF();
