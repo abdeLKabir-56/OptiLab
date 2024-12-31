@@ -33,6 +33,7 @@
     "apexcharts": "^4.3.0",
     "chart.js": "^4.4.7",
     "file-loader": "^6.2.0",
+    "jspdf": "^2.5.2",
     "leaflet": "^1.9.4",
     "libphonenumber-js": "^1.11.17",
     "ng-alain": "^18.3.0",

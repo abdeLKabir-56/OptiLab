@@ -25,8 +25,8 @@
           <p-tag [value]="analysis.status" [severity]="getSeverity(analysis.status)" />
       </td>
         <td>
-          <p-button icon="pi pi-download" label="Download"  />
-          <!-- <p-button icon="pi pi-download" label="Download" (click)="downloadAnalysis(analysis.id)" /> -->
+          <p-button (onClick)="generateAnalysisPdf(analysis)" icon="pi pi-download" label="Download"  />
+          
         </td>
       </tr>
     </ng-template>
