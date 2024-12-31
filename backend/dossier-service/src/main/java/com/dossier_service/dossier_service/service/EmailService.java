@@ -4,6 +4,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -26,7 +27,7 @@ public class EmailService {
         mailSender.send(message);
     }
 
-    public String generateEmailContent(String recipientName, String notificationType, String notificationDetails) {
+    public String generateEmailContent(String recipientName, String notificationType, String notificationDetails) throws IOException {
         String template = new String(Files.readAllBytes(Paths.get("src/main/resources/templates/email-template.html")), StandardCharsets.UTF_8);
         return template
                 .replace("{{recipientName}}", recipientName)

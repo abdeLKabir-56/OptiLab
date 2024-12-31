@@ -14,7 +14,6 @@ public class ExamenMapper implements Mapper<Examen, ExamenDTO> {
 
         ExamenDTO dto = new ExamenDTO();
         dto.setId(entity.getId());
-        dto.setDossier(entity.getDossier());
         dto.setEpreuve(entity.getEpreuve());
         dto.setResultat(entity.getResultat());
         dto.setObservations(entity.getObservations());

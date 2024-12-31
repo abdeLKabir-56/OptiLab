@@ -7,11 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class AnalyseService {
+
     private final AnalyseRepository analyseRepository;
 
     public Analyse createAnalyse(Analyse analyse) {
@@ -22,7 +22,7 @@ public class AnalyseService {
         return analyseRepository.findAll();
     }
 
-    public Analyse getAnalyseById(Long  id) {
+    public Analyse getAnalyseById(Long id) {
         return analyseRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Analyse not found with ID: " + id));
     }
@@ -32,14 +32,14 @@ public class AnalyseService {
                 .map(analyse -> {
                     analyse.setNom(updatedAnalyse.getNom());
                     analyse.setDescription(updatedAnalyse.getDescription());
-                    analyse.setFkIdLaboratoire(updatedAnalyse.getFkIdLaboratoire());
-                    analyse.setEpreuves(updatedAnalyse.getEpreuves());
+                    analyse.setStatus(updatedAnalyse.getStatus());
+                    analyse.setDate(updatedAnalyse.getDate());
                     return analyseRepository.save(analyse);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Analyse not found with ID: " + id));
     }
 
-    public void deleteAnalyse(Long  id) {
+    public void deleteAnalyse(Long id) {
         if (!analyseRepository.existsById(id)) {
             throw new ResourceNotFoundException("Analyse not found with ID: " + id);
         }

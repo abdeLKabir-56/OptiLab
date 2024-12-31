@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class DossierService {
+
     private final DossierRepository dossierRepository;
 
     public Dossier createDossier(Dossier dossier) {
@@ -29,10 +30,8 @@ public class DossierService {
     public Dossier updateDossier(Long id, Dossier updatedDossier) {
         return dossierRepository.findById(id)
                 .map(existingDossier -> {
-                    existingDossier.setFkEmailUtilisateur(updatedDossier.getFkEmailUtilisateur());
-                    existingDossier.setFkIdPatient(updatedDossier.getFkIdPatient());
-                    existingDossier.setStatus(updatedDossier.getStatus());
-                    existingDossier.setDate(updatedDossier.getDate());
+                    existingDossier.setNom(updatedDossier.getNom());
+                    existingDossier.setDescription(updatedDossier.getDescription());
                     return dossierRepository.save(existingDossier);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Dossier not found with ID: " + id));

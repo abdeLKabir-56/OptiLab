@@ -13,11 +13,11 @@ public class EmailController {
         this.emailService = emailService;
     }
 
-    @GetMapping("/send-email")
+    /*@GetMapping("/send-email")
     public String sendEmail() {
         String emailContent = emailService.generateEmailContent("abdelkabir Elhamoussi", "Exam Result", "Your exam results are now available.");
         emailService.sendEmail("abdelkabirelhamoussi@gmail.com", "Exam Notification", emailContent);
         return "Email Sent!";
-    }
+    }*/
 }
 

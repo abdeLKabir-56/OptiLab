@@ -1,6 +1,7 @@
 package com.dossier_service.dossier_service.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,12 +17,16 @@ public class Epreuve {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long fkIdAnalyse; // Foreign key to Analyse (as Long to match the id type of Analyse)
     private String nom;
 
-    // Many-to-one relationship with Analyse
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fkIdAnalyse", nullable = false, insertable = false, updatable = false)
-    @JsonBackReference
-    private Analyse analyse; // This should map to the 'analyse' in Analyse entity
+    @ManyToOne
+    @JoinColumn(name = "analyse_id", nullable = true)
+    @JsonBackReference // Prevents recursion back to the parent Analyse
+    private Analyse analyse;
+
+    // One-to-one relationship with Examen
+    @OneToOne(mappedBy = "epreuve", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference // Ensures proper serialization of the relationship
+    private Examen examen;
 }
+

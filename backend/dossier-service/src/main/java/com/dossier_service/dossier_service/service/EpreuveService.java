@@ -12,7 +12,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class EpreuveService {
+
     private final EpreuveRepository epreuveRepository;
+
     @Transactional
     public Epreuve createEpreuve(Epreuve epreuve) {
         return epreuveRepository.save(epreuve);
@@ -31,7 +33,6 @@ public class EpreuveService {
         return epreuveRepository.findById(id)
                 .map(epreuve -> {
                     epreuve.setNom(updatedEpreuve.getNom());
-                    epreuve.setFkIdAnalyse(updatedEpreuve.getFkIdAnalyse());
                     return epreuveRepository.save(epreuve);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Epreuve not found with ID: " + id));
