@@ -20,10 +20,10 @@ import { InputNumber } from 'primeng/inputnumber';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { Table } from 'primeng/table';
-import { Product } from '../../types/product';
+import { Laboratoire } from '../../types/laboratoire';
 import { ApiService } from '../../services/api.service';
 import { DropdownModule } from 'primeng/dropdown';
-
+import { LaboratoireService } from '../../services/labos/laboratoire.service';
 
 interface Column {
     field: string;
@@ -40,7 +40,7 @@ interface ExportColumn {
     selector: 'app-labos',
     templateUrl: './labos.component.html',
     standalone: true,
-    imports: [TableModule, Dialog, SelectModule, ToastModule, ToolbarModule, ConfirmDialog, InputTextModule, TextareaModule, CommonModule, FileUpload, DropdownModule, Tag, RadioButton, Rating, InputTextModule, FormsModule, InputNumber, IconFieldModule, InputIconModule , ButtonModule],
+    imports: [TableModule, Dialog, SelectModule, ToastModule, ToolbarModule, ConfirmDialog, InputTextModule, TextareaModule, CommonModule, FileUpload, DropdownModule, Tag, RadioButton, Rating, InputTextModule, FormsModule, InputNumber, IconFieldModule, InputIconModule, ButtonModule],
     providers: [MessageService, ConfirmationService, ApiService],
     styles: [
         `:host ::ng-deep .p-dialog .product-image {
@@ -50,19 +50,17 @@ interface ExportColumn {
         }`
     ]
 })
-export class LabosComponent implements OnInit{
-    productDialog: boolean = false;
-    cancel!:boolean
+export class LabosComponent implements OnInit {
+    laboratoireDialog: boolean = false;
+    cancel!: boolean
 
-    products!: Product[];
+    laboratoires!: Laboratoire[];
 
-    product!: Product ;
+    laboratoire!: Laboratoire;
 
-    selectedProducts!: Product[] | null;
+    selectedLaboratoires!: Laboratoire[] | null;
 
     submitted: boolean = false;
-
-    statuses!: any[];
 
     @ViewChild('dt') dt!: Table;
 
@@ -71,164 +69,141 @@ export class LabosComponent implements OnInit{
     exportColumns!: ExportColumn[];
 
     constructor(
-        private productService: ApiService,
+        private laboratoireService: LaboratoireService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
         private cd: ChangeDetectorRef
-    ) {}
+    ) { }
 
     exportCSV() {
         this.dt.exportCSV();
     }
+
     applyFilterGlobal($event: any, stringVal: any) {
-      this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+        this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
     }
 
     loadDemoData() {
-        this.productService.getProducts().subscribe((data) => {
-            this.products = data;
+        this.laboratoireService.getLaboratoires().subscribe((data) => {
+            this.laboratoires = data;
             this.cd.markForCheck();
         });
 
-        this.statuses = [
-            { label: 'INSTOCK', value: 'instock' },
-            { label: 'LOWSTOCK', value: 'lowstock' },
-            { label: 'OUTOFSTOCK', value: 'outofstock' }
-        ];
-
         this.cols = [
-            { field: 'code', header: 'Code', customExportHeader: 'Product Code' },
-            { field: 'name', header: 'Name' },
-            { field: 'image', header: 'Image' },
-            { field: 'price', header: 'Price' },
-            { field: 'category', header: 'Category' }
+            { field: 'id', header: 'ID' },
+            { field: 'nom', header: 'Nom' },
+            { field: 'logo', header: 'Logo' },
+            { field: 'nrc', header: 'NRC' },
+            { field: 'isActive', header: 'Active' },
+            { field: 'dateActivation', header: 'Date Activation' }
         ];
 
         this.exportColumns = this.cols.map((col) => ({ title: col.header, dataKey: col.field }));
     }
- ngOnInit(): void {
-   this.loadDemoData()
- }
+
+    ngOnInit(): void {
+        this.loadDemoData()
+    }
+
     openNew() {
-        this.product = {} as Product;
+        this.laboratoire = {} as Laboratoire;
         this.submitted = false;
-        this.productDialog = true;
+        this.laboratoireDialog = true;
     }
 
-    editProduct(product: Product) {
-        this.product = { ...product };
-        this.productDialog = true;
+    editLaboratoire(laboratoire: Laboratoire) {
+        this.laboratoire = { ...laboratoire };
+        this.laboratoireDialog = true;
     }
 
-    deleteSelectedProducts() {
+    deleteSelectedLaboratoires() {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected products?',
+            message: 'Are you sure you want to delete the selected laboratoires?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.products = this.products.filter((val) => !this.selectedProducts?.includes(val));
-                this.selectedProducts = null;
+                this.laboratoires = this.laboratoires.filter((val) => !this.selectedLaboratoires?.includes(val));
+                this.selectedLaboratoires = null;
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Products Deleted',
+                    detail: 'Laboratoires Deleted',
                     life: 3000
-                });
+                  });
+                }
+            });
+        }
+    
+        hideDialog() {
+            this.laboratoireDialog = false;
+            this.submitted = false;
+        }
+    
+        deleteLaboratoire(laboratoire: Laboratoire) {
+            this.laboratoireService.deleteLaboratoire(laboratoire.id).subscribe({
+                next: () => {
+                    this.confirmationService.confirm({
+                        message: 'Are you sure you want to delete ' + laboratoire.nom + '?',
+                        header: 'Confirm',
+                        icon: 'pi pi-exclamation-triangle',
+                        accept: () => {
+                            this.laboratoires = this.laboratoires.filter((val) => val.id !== laboratoire.id);
+                            this.laboratoire = {} as Laboratoire;
+                            this.messageService.add({
+                                severity: 'success',
+                                summary: 'Successful',
+                                detail: 'Laboratoire Deleted',
+                                life: 3000
+                            });
+                        }
+                    });
+                },
+                error: () => console.log("Cannot delete")
+            });
+        }
+    
+        findIndexById(id: number): number {
+            let index = -1;
+            for (let i = 0; i < this.laboratoires.length; i++) {
+                if (this.laboratoires[i].id === id) {
+                    index = i;
+                    break;
+                }
             }
-        });
-    }
-
-    hideDialog() {
-        this.productDialog = false;
-        this.submitted = false;
-    }
-
-    deleteProduct(product: Product) {
-        this.productService.deleteProduct(product.id).subscribe({
-            next:()=>{
-                this.confirmationService.confirm({
-                    message: 'Are you sure you want to delete ' + product.name + '?',
-                    header: 'Confirm',
-                    icon: 'pi pi-exclamation-triangle',
-                    accept: () => {
-                        this.products = this.products.filter((val) => val.id !== product.id);
-                        this.product = {} as Product;
-                        this.messageService.add({
-                            severity: 'success',
-                            summary: 'Successful',
-                            detail: 'Product Deleted',
-                            life: 3000
-                        });
-                    }
-                });
-            },
-            error:()=>console.log("Cannot delete")
-        })
-        
-    }
-
-    findIndexById(id: string): number {
-        let index = -1;
-        for (let i = 0; i < this.products.length; i++) {
-            if (this.products[i].id === id) {
-                index = i;
-                break;
+    
+            return index;
+        }
+    
+        saveLaboratoire() {
+            this.submitted = true;
+    
+            if (this.laboratoire.nom?.trim()) {
+                if (this.laboratoire.id) {
+                    this.laboratoires[this.findIndexById(this.laboratoire.id)] = this.laboratoire;
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Successful',
+                        detail: 'Laboratoire Updated',
+                        life: 3000
+                    });
+                } else {
+                    this.laboratoireService.addLaboratoire(this.laboratoire).subscribe({
+                        next: (data) => {
+                            this.laboratoires.push(data);
+                            this.messageService.add({
+                                severity: 'success',
+                                summary: 'Successful',
+                                detail: 'Laboratoire Created',
+                                life: 3000
+                            });
+                        },
+                        error: () => console.log("Cannot create")
+                    });
+                }
+    
+                this.laboratoires = [...this.laboratoires];
+                this.laboratoireDialog = false;
+                this.laboratoire = {} as Laboratoire;
             }
         }
-
-        return index;
     }
-
-    createId(): string {
-        let id = '';
-        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (var i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return id;
-    }
-
-    getSeverity(status: string) {
-      switch (status) {
-          case 'INSTOCK':
-              return 'success';
-          case 'LOWSTOCK':
-              return 'warn';  // Changed from 'warning' to 'warn'
-          case 'OUTOFSTOCK':
-              return 'danger';
-          default:
-              return undefined;  // Return undefined as a fallback (optional)
-      }
-  }
-  
-
-    saveProduct() {
-        this.submitted = true;
-
-        if (this.product.name?.trim()) {
-            if (this.product.id) {
-                this.products[this.findIndexById(this.product.id)] = this.product;
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Product Updated',
-                    life: 3000
-                });
-            } else {
-                this.product.id = this.createId();
-                this.product.image = 'product-placeholder.svg';
-                this.products.push(this.product);
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Product Created',
-                    life: 3000
-                });
-            }
-
-            this.products = [...this.products];
-            this.productDialog = false;
-            this.product = {} as Product;
-        }
-    }
-}

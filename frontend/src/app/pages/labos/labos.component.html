@@ -1,6 +1,6 @@
 <main class="grid grid-cols-1 grid-rows-[100px,85px,1fr] gap-4 mt-3 mx-auto border border-red-100 px-16">
-  <div class=" bg-[#ecf2ff] rounded-md p-6 relative overflow-hidden">
-    <h1 class="font-semibold text-xl mb-4">List of laboratories</h1>
+  <div class="bg-[#ecf2ff] rounded-md p-6 relative overflow-hidden">
+    <h1 class="font-semibold text-xl mb-4">List of Laboratories</h1>
     <div class="absolute right-0 -bottom-2 opacity-20"><img src="../../../assets/ChatBc.png" class="w-40 h-40" alt=""></div>
   </div>
   <div class="">
@@ -8,7 +8,7 @@
     <p-toolbar styleClass="mb-6">
         <ng-template #start>
             <p-button label="New" icon="pi pi-plus" class="mr-2" (onClick)="openNew()" />
-            <p-button severity="danger" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length" />
+            <p-button severity="danger" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedLaboratoires()" [disabled]="!selectedLaboratoires || !selectedLaboratoires.length" />
         </ng-template>
 
         <ng-template #end>
@@ -18,14 +18,15 @@
     </p-toolbar>
 
     <p-table
+       size="small"
         #dt
-        [value]="products"
+        [value]="laboratoires"
         [rows]="10"
         [columns]="cols"
         [paginator]="true"
-        [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+        [globalFilterFields]="['nom', 'nrc', 'isActive']"
         [tableStyle]="{ 'min-width': '70rem' }"
-        [(selection)]="selectedProducts"
+        [(selection)]="selectedLaboratoires"
         [rowHover]="true"
         dataKey="id"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -33,7 +34,7 @@
     >
         <ng-template #caption>
             <div class="flex items-center justify-between">
-                <h5 class="m-0">Manage Products</h5>
+                <h5 class="m-0">Manage Laboratories</h5>
                 <p-iconfield>
                     <p-inputicon styleClass="pi pi-search" />
                     <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Filter" />
@@ -45,120 +46,83 @@
                 <th style="width: 3rem">
                     <p-tableHeaderCheckbox />
                 </th>
-                <th style="min-width: 16rem">Code</th>
-                <th pSortableColumn="name" style="min-width:16rem">
+                <th style="min-width: 16rem">ID</th>
+                <th pSortableColumn="nom" style="min-width:16rem">
                     Name
-                    <p-sortIcon field="name" />
+                    <p-sortIcon field="nom" />
                 </th>
-                <th>Image</th>
-                <th pSortableColumn="price" style="min-width: 8rem">
-                    Price
-                    <p-sortIcon field="price" />
+                <th>Logo</th>
+                <th pSortableColumn="nrc" style="min-width: 8rem">
+                    NRC
+                    <p-sortIcon field="nrc" />
                 </th>
-                <th pSortableColumn="category" style="min-width:10rem">
-                    Category
-                    <p-sortIcon field="category" />
+                <th pSortableColumn="isActive" style="min-width:10rem">
+                    Active
+                    <p-sortIcon field="isActive" />
                 </th>
-                <th pSortableColumn="rating" style="min-width: 12rem">
-                    Reviews
-                    <p-sortIcon field="rating" />
-                </th>
-                <th pSortableColumn="inventoryStatus" style="min-width: 12rem">
-                    Status
-                    <p-sortIcon field="inventoryStatus" />
+                <th pSortableColumn="dateActivation" style="min-width: 12rem">
+                    Date Activation
+                    <p-sortIcon field="dateActivation" />
                 </th>
                 <th style="min-width: 12rem"></th>
             </tr>
         </ng-template>
-        <ng-template #body let-product>
+        <ng-template #body let-laboratoire>
             <tr>
                 <td style="width: 3rem">
-                    <p-tableCheckbox [value]="product" />
+                    <p-tableCheckbox [value]="laboratoire" />
                 </td>
-                <td style="min-width: 12rem">{{ product.code }}</td>
-                <td style="min-width: 16rem">{{ product.name }}</td>
+                <td style="min-width: 12rem">{{ laboratoire.id }}</td>
+                <td style="min-width: 16rem">{{ laboratoire.nom }}</td>
                 <td>
-                    <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.name" style="width: 64px" class="rounded" />
+                    <img [src]="laboratoire.logo" [alt]="laboratoire.nom" style="width: 64px" class="rounded" />
                 </td>
-                <td>{{ product.price | currency: 'USD' }}</td>
-                <td>{{ product.category }}</td>
+                <td>{{ laboratoire.nrc }}</td>
                 <td>
-                    <p-rating [(ngModel)]="product.rating" [readonly]="true" />
+                  <p-tag [value]="laboratoire.isActive ? 'active' :'inactive'" [severity]="laboratoire.isActive ? 'success':'danger' " />
                 </td>
+                <td>{{ laboratoire.dateActivation }}</td>
                 <td>
-                    <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)" />
+                    <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editLaboratoire(laboratoire)" />
+                    <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteLaboratoire(laboratoire)" />
                 </td>
-                <td>
-                    <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editProduct(product)" />
-                    <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteProduct(product)" />
-                </td>
-            </tr>
-        </ng-template>
-        <ng-template #summary>
-            <div class="flex items-center justify-between">In total there are {{ products ? products.length : 0 }} products.</div>
-        </ng-template>
-    </p-table>
-
-    <p-dialog [(visible)]="productDialog" [style]="{ width: '450px' }" header="Product Details" [modal]="true">
-        <ng-template #content>
-            <div class="flex flex-col gap-6">
-                <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.image" class="block m-auto pb-4" *ngIf="product.image" />
-                <div>
-                    <label for="name" class="block font-bold mb-3">Name</label>
-                    <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus fluid />
-                    <small class="text-red-500" *ngIf="submitted && !product.name">Name is required.</small>
-                </div>
-                <div>
-                    <label for="description" class="block font-bold mb-3">Description</label>
-                    <textarea id="description" pTextarea [(ngModel)]="product.description" required rows="3" cols="20" fluid></textarea>
-                </div>
-
-                <div>
-                    <label for="inventoryStatus" class="block font-bold mb-3">Inventory Status</label>
-                    <p-select [(ngModel)]="product.inventoryStatus" inputId="inventoryStatus" [options]="statuses" optionLabel="label" placeholder="Select a Status" fluid />
-                </div>
-
-                <div>
-                    <span class="block font-bold mb-4">Category</span>
-                    <div class="grid grid-cols-12 gap-4">
-                        <div class="flex items-center gap-2 col-span-6">
-                            <p-radiobutton id="category1" name="category" value="Accessories" [(ngModel)]="product.category" />
-                            <label for="category1">Accessories</label>
-                        </div>
-                        <div class="flex items-center gap-2 col-span-6">
-                            <p-radiobutton id="category2" name="category" value="Clothing" [(ngModel)]="product.category" />
-                            <label for="category2">Clothing</label>
-                        </div>
-                        <div class="flex items-center gap-2 col-span-6">
-                            <p-radiobutton id="category3" name="category" value="Electronics" [(ngModel)]="product.category" />
-                            <label for="category3">Electronics</label>
-                        </div>
-                        <div class="flex items-center gap-2 col-span-6">
-                            <p-radiobutton id="category4" name="category" value="Fitness" [(ngModel)]="product.category" />
-                            <label for="category4">Fitness</label>
-                        </div>
+              </tr>
+            </ng-template>
+            <ng-template #summary>
+                <div class="flex items-center justify-between">In total there are {{ laboratoires ? laboratoires.length : 0 }} laboratoires.</div>
+            </ng-template>
+        </p-table>
+    
+        <p-dialog [(visible)]="laboratoireDialog" [style]="{ width: '450px' }" header="Laboratoire Details" [modal]="true">
+            <ng-template #content>
+                <div class="flex flex-col gap-6">
+                    <img [src]="laboratoire.logo" [alt]="laboratoire.nom" class="block m-auto pb-4" *ngIf="laboratoire.logo" />
+                    <div>
+                        <label for="nom" class="block font-bold mb-3">Name</label>
+                        <input type="text" pInputText id="nom" [(ngModel)]="laboratoire.nom" required autofocus fluid />
+                        <small class="text-red-500" *ngIf="submitted && !laboratoire.nom">Name is required.</small>
+                    </div>
+                    <div>
+                        <label for="nrc" class="block font-bold mb-3">NRC</label>
+                        <input type="text" pInputText id="nrc" [(ngModel)]="laboratoire.nrc" required fluid />
+                    </div>
+                    <div>
+                        <label for="isActive" class="block font-bold mb-3">Active</label>
+                        <p-select [(ngModel)]="laboratoire.isActive" inputId="isActive" [options]="[{label: 'Yes', value: true}, {label: 'No', value: false}]" optionLabel="label" placeholder="Select a Status" fluid />
+                    </div>
+                    <div>
+                        <label for="dateActivation" class="block font-bold mb-3">Date Activation</label>
+                        <p-calendar [(ngModel)]="laboratoire.dateActivation" id="dateActivation" required fluid />
                     </div>
                 </div>
-
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-6">
-                        <label for="price" class="block font-bold mb-3">Price</label>
-                        <p-inputnumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US" fluid />
-                    </div>
-                    <div class="col-span-6">
-                        <label for="quantity" class="block font-bold mb-3">Quantity</label>
-                        <p-inputnumber id="quantity" [(ngModel)]="product.quantity" fluid />
-                    </div>
-                </div>
-            </div>
-        </ng-template>
-
-        <ng-template #footer>
-            <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
-            <p-button label="Save" icon="pi pi-check" (click)="saveProduct()" />
-        </ng-template>
-    </p-dialog>
-
-    <p-confirmDialog [style]="{ width: '450px' }" />
-</div>
-</main>
+            </ng-template>
+    
+            <ng-template #footer>
+                <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+                <p-button label="Save" icon="pi pi-check" (click)="saveLaboratoire()" />
+            </ng-template>
+        </p-dialog>
+    
+        <p-confirmDialog [style]="{ width: '450px' }" />
+    </div>
+    </main>
