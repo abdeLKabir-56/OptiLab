@@ -1,0 +1,134 @@
+<main class="grid grid-cols-1 grid-rows-[100px,85px,1fr] gap-4 mt-3 mx-auto border border-red-100 px-16">
+  <div class="bg-[#ecf2ff] rounded-md p-6 relative overflow-hidden">
+    <h1 class="font-semibold text-xl mb-4">List of Analyses</h1>
+    <div class="absolute right-0 -bottom-2 opacity-20"><img src="../../../assets/ChatBc.png" class="w-40 h-40" alt=""></div>
+  </div>
+  <div class="">
+    <p-toast />
+    <p-toolbar styleClass="mb-6">
+        <ng-template #start>
+            <p-button label="New" icon="pi pi-plus" class="mr-2" (onClick)="openNew()" />
+            <p-button severity="danger" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedAnalyses()" [disabled]="!selectedAnalyses || !selectedAnalyses.length" />
+        </ng-template>
+
+        <ng-template #end>
+            <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" auto customUpload class="mr-2 inline-block" [chooseButtonProps]="{ severity: 'secondary' }" />
+            <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        #dt
+        [value]="analyses"
+        [rows]="10"
+        [columns]="cols"
+        [paginator]="true"
+        [globalFilterFields]="['nom', 'laboratoire', 'description', 'status']"
+        [tableStyle]="{ 'min-width': '70rem' }"
+        [(selection)]="selectedAnalyses"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+        size="small"
+    >
+        <ng-template #caption>
+            <div class="flex items-center justify-between">
+                <h5 class="m-0">Manage Analyses</h5>
+                <p-iconfield>
+                    <p-inputicon styleClass="pi pi-search" />
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Filter" />
+                </p-iconfield>
+            </div>
+        </ng-template>
+        <ng-template #header>
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox />
+                </th>
+                <th style="min-width: 16rem">Patient</th>
+                <th pSortableColumn="nom" style="min-width:16rem">
+                    Analyse
+                    <p-sortIcon field="nom" />
+                </th>
+                <th pSortableColumn="laboratoire" style="min-width:16rem">
+                    Laboratory
+                    <p-sortIcon field="laboratoire" />
+                </th>
+                <th pSortableColumn="description" style="min-width: 16rem">
+                    Description
+                    <p-sortIcon field="description" />
+                </th>
+                <th pSortableColumn="status" style="min-width: 8rem">
+                    Status
+                    <p-sortIcon field="status" />
+                </th>
+                <th pSortableColumn="username" style="min-width:10rem">
+                    Username
+                    <p-sortIcon field="username" />
+                </th>
+                <th style="min-width: 12rem">Visit Epreuve</th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-analyse>
+            <tr>
+                <td style="width: 3rem">
+                    <p-tableCheckbox [value]="analyse" />
+                </td>
+                <td>{{ analyse.username }}</td>
+                <td style="min-width: 16rem">{{ analyse.nom }}</td>
+                <td style="min-width: 16rem">{{ analyse.laboratoire }}</td>
+                <td style="min-width: 16rem">{{ analyse.description }}</td>
+                <td>{{ analyse.status }}</td>
+                
+                <td>
+                    <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editAnalyse(analyse)" />
+                    <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteAnalyse(analyse)" />
+                </td>
+                <a [routerLink]="['/dashboard/analyses', analyse.id]">
+                <td><p-button label="Affect result" severity="help" />
+                </td>
+              </a>
+            </tr>
+        </ng-template>
+        <ng-template #summary>
+            <div class="flex items-center justify-between">In total there are {{ analyses ? analyses.length : 0 }} analyses.</div>
+        </ng-template>
+    </p-table>
+
+    <p-dialog [(visible)]="analyseDialog" [style]="{ width: '450px' }" header="Analyse Details" [modal]="true">
+        <ng-template #content>
+            <div class="flex flex-col gap-6">
+                <div>
+                    <label for="nom" class="block font-bold mb-3">Name</label>
+                    <input type="text" pInputText id="nom" [(ngModel)]="analyse.nom" required autofocus fluid />
+                    <small class="text-red-500" *ngIf="submitted && !analyse.nom">Name is required.</small>
+                </div>
+                <div>
+                    <label for="laboratoire" class="block font-bold mb-3">Laboratory</label>
+                    <input type="text" pInputText id="laboratoire" [(ngModel)]="analyse.laboratoire" required fluid />
+                </div>
+                <div>
+                    <label for="description" class="block font-bold mb-3">Description</label>
+                    <textarea id="description" pTextarea [(ngModel)]="analyse.description" required rows="3" cols="20" fluid></textarea>
+                </div>
+                <div>
+                    <label for="status" class="block font-bold mb-3">Status</label>
+                    <p-select [(ngModel)]="analyse.status" inputId="status" [options]="[{label: 'Resolved', value: 'resolved'}, {label: 'Pending', value: 'pending'}]" optionLabel="label" placeholder="Select a Status" fluid />
+                </div>
+                <div>
+                    <label for="username" class="block font-bold mb-3">Username</label>
+                    <input type="text" pInputText id="username" [(ngModel)]="analyse.username" required fluid />
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template #footer>
+            <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+            <p-button label="Save" icon="pi pi-check" (click)="saveAnalyse()" />
+        </ng-template>
+    </p-dialog>
+
+    <p-confirmDialog [style]="{ width: '450px' }" />
+</div>
+</main>

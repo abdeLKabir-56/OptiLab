@@ -1,0 +1,113 @@
+<main class="grid grid-cols-1 grid-rows-[100px,85px,1fr] gap-4 mt-3 mx-auto border border-red-100 px-16">
+  <div class="bg-[#ecf2ff] rounded-md p-6 relative overflow-hidden flex flex-start flex-col">
+    <h1 class="font-semibold text-xl mb-4">Analyse Details:{{analyse.nom}}</h1>
+    <h2 class="font-normal text-base mb-4">Patient: <span class="font-semibold">{{analyse.username}}</span></h2>
+    <div class="absolute right-0 -bottom-2 opacity-20"><img src="../../../assets/ChatBc.png" class="w-40 h-40" alt=""></div>
+  </div>
+  <div class="">
+    <p-toast />
+    <p-toolbar styleClass="mb-6">
+        <ng-template #start>
+          <p-button label="New" icon="pi pi-plus" class="mr-2" (onClick)="openNew()"  />
+            <p-button severity="danger" label="Delete" icon="pi pi-trash" outlined  [disabled]="!selectedEpreuves || !selectedEpreuves.length" />
+            <!-- <p-button severity="danger" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedEpreuves()" [disabled]="!selectedEpreuves || !selectedEpreuves.length" /> -->
+        </ng-template>
+
+        <ng-template #end>
+            <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" auto customUpload class="mr-2 inline-block" [chooseButtonProps]="{ severity: 'secondary' }" />
+            <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        #dt
+        [value]="epreuves"
+        [rows]="10"
+        [columns]="cols"
+        [paginator]="true"
+        [globalFilterFields]="['nom', 'resultat', 'observations']"
+        [tableStyle]="{ 'min-width': '70rem' }"
+        [(selection)]="selectedEpreuves"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+    >
+        <ng-template #caption>
+            <div class="flex items-center justify-between">
+                <h5 class="m-0">Manage Epreuves</h5>
+                <p-iconfield>
+                    <p-inputicon styleClass="pi pi-search" />
+                    <input pInputText type="text"  placeholder="Filter" />
+                    <!-- <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Filter" /> -->
+                </p-iconfield>
+            </div>
+        </ng-template>
+        <ng-template #header>
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox />
+                </th>
+                <th pSortableColumn="nom" style="min-width:16rem">
+                    Nom
+                    <p-sortIcon field="nom" />
+                </th>
+                <th pSortableColumn="resultat" style="min-width:16rem">
+                    Resultat
+                    <p-sortIcon field="resultat" />
+                </th>
+                <th pSortableColumn="observations" style="min-width: 16rem">
+                    Observations
+                    <p-sortIcon field="observations" />
+                </th>
+                <th style="min-width: 12rem"></th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-epreuve>
+            <tr>
+                <td style="width: 3rem">
+                    <p-tableCheckbox [value]="epreuve" />
+                </td>
+                <td style="min-width: 16rem">{{ epreuve.nom }}</td>
+                <td style="min-width: 16rem">{{ epreuve.resultat }}</td>
+                <td style="min-width: 16rem">{{ epreuve.observations }}</td>
+                <td>
+                  <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true"  />
+                    <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true"  />
+                    <!-- <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editEpreuve(epreuve)" />
+                    <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteEpreuve(epreuve)" /> -->
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-dialog [(visible)]="epreuveDialog" [style]="{ width: '450px' }" header="Epreuve Details" [modal]="true">
+        <ng-template #content>
+            <div class="flex flex-col gap-6">
+                <div>
+                    <label for="nom" class="block font-bold mb-3">Nom</label>
+                    <input type="text" pInputText id="nom" [(ngModel)]="epreuve.nom" required autofocus fluid />
+                    <small class="text-red-500" *ngIf="submitted && !epreuve.nom">Nom is required.</small>
+                </div>
+                <div>
+                    <label for="resultat" class="block font-bold mb-3">Resultat</label>
+                    <input type="text" pInputText id="resultat" [(ngModel)]="epreuve.examen.resultat" required fluid />
+                </div>
+                <div>
+                    <label for="observations" class="block font-bold mb-3">Observations</label>
+                    <textarea id="observations" pTextarea [(ngModel)]="epreuve.examen.observations" required rows="3" cols="20" fluid></textarea>
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template #footer>
+          <p-button label="Cancel" icon="pi pi-times" text  />
+            <p-button label="Save" icon="pi pi-check"  />
+            <!-- <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+            <p-button label="Save" icon="pi pi-check" (click)="saveEpreuve()" /> -->
+        </ng-template>
+    </p-dialog>
+
+    <p-confirmDialog [style]="{ width: '450px' }" />
+</div>
+</main>

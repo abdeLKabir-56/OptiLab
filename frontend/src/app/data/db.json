@@ -233,5 +233,201 @@
         "value": true
       }
     }
-  ]
+  ],
+  "analyses":[
+    {
+        "id": "1",
+        "laboratoire": "Rayssoni",
+        "nom": "Sang complet",
+        "description": "Analyse sanguine.",
+        "status": "resolved",
+        "username": "john_doe",
+        "epreuves": [
+            {
+                "id": "100",
+                "nom": "Numération globules blancs",
+                "examen": {
+                    "resultat": "Positive",
+                    "observations": "Detailed observations"
+                }
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "laboratoire": "LabExpert",
+        "nom": "Biochimie",
+        "description": "Analyse biochimique.",
+        "status": "pending",
+        "username": "jane_smith",
+        "epreuves": [
+            {
+                "id": "200",
+                "nom": "Glucose sanguin",
+                "examen": {
+                    "resultat": "",
+                    "observations": ""
+                }
+            },
+            {
+                "id": "201",
+                "nom": "Protéines totales",
+                "examen": {
+                    "resultat": "",
+                    "observations": ""
+                }
+            },
+            {
+                "id": "202",
+                "nom": "Albumine sérique",
+                "examen": {
+                    "resultat": "",
+                    "observations": ""
+                }
+            }
+        ]
+    },
+    {
+        "id": "3",
+        "laboratoire": "Medilab",
+        "nom": "Microbiologie",
+        "description": "Analyse microbiologique.",
+        "status": "pending",
+        "username": "admin_user",
+        "epreuves": [
+            {
+                "id": "300",
+                "nom": "Culture bactérienne",
+                "examen": {
+                    "resultat": "",
+                    "observations": ""
+                }
+            },
+            {
+                "id": "301",
+                "nom": "Antibiogramme",
+                "examen": {
+                    "resultat": "",
+                    "observations": ""
+                }
+            }
+        ]
+    },
+    {
+        "id": "4",
+        "laboratoire": "BioDiag",
+        "nom": "Hormonologie",
+        "description": "Analyse hormonale.",
+        "status": "resolved",
+        "username": "lab_technician_1",
+        "epreuves": [
+            {
+                "id": "400",
+                "nom": "TSH",
+                "examen": {
+                    "resultat": "Normale",
+                    "observations": "Valeur dans la plage normale"
+                }
+            }
+        ]
+    },
+    {
+        "id": "5",
+        "laboratoire": "BioTech Solutions",
+        "nom": "Cytologie",
+        "description": "Analyse cytologique.",
+        "status": "resolved",
+        "username": "tech_user_1",
+        "epreuves": [
+            {
+                "id": "500",
+                "nom": "Étude des cellules",
+                "examen": {
+                    "resultat": "Normale",
+                    "observations": "Aucune anomalie détectée"
+                }
+            }
+        ]
+    },
+    {
+        "id": "6",
+        "laboratoire": "NextGen Diagnostics",
+        "nom": "Hématologie",
+        "description": "Analyse hématologique.",
+        "status": "pending",
+        "username": "john_doe",
+        "epreuves": [
+            {
+                "id": "600",
+                "nom": "Vitesse de sédimentation",
+                "examen": {
+                    "resultat": "",
+                    "observations": ""
+                }
+            },
+            {
+                "id": "601",
+                "nom": "Numération plaquettaire",
+                "examen": {
+                    "resultat": "",
+                    "observations": ""
+                }
+            }
+        ]
+    },
+    {
+        "id": "7",
+        "laboratoire": "Medilab",
+        "nom": "Immunologie",
+        "description": "Analyse immunologique.",
+        "status": "resolved",
+        "username": "jane_smith",
+        "epreuves": [
+            {
+                "id": "700",
+                "nom": "Recherche d'anticorps",
+                "examen": {
+                    "resultat": "Positive",
+                    "observations": "Présence d'anticorps détectée"
+                }
+            }
+        ]
+    },
+    {
+        "id": "8",
+        "laboratoire": "BioDiag",
+        "nom": "Enzymologie",
+        "description": "Analyse enzymatique.",
+        "status": "resolved",
+        "username": "lab_admin",
+        "epreuves": [
+            {
+                "id": "800",
+                "nom": "Dosage enzymatique",
+                "examen": {
+                    "resultat": "Normale",
+                    "observations": "Aucune anomalie détectée"
+                }
+            }
+        ]
+    },
+    {
+        "id": "9",
+        "laboratoire": "BioTech Solutions",
+        "nom": "Allergologie",
+        "description": "Analyse allergologique.",
+        "status": "pending",
+        "username": "tech_user_2",
+        "epreuves": [
+            {
+                "id": "900",
+                "nom": "Test cutané",
+                "examen": {
+                    "resultat": "",
+                    "observations": ""
+                }
+            }
+        ]
+    }
+]
 }

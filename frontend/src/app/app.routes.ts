@@ -12,6 +12,8 @@ import { UserPortalComponent } from './pages/user-portal/user-portal.component';
 import { SupportMessageComponent } from './pages/support-message/support-message.component';
 import { MedicalFolderComponent } from './pages/medical-folder/medical-folder.component';
 import { AnalysisComponent } from './pages/analysis/analysis.component';
+import { AnalysesComponent } from './pages/analyses/analyses.component';
+import { AnalysesDetailsComponent } from './pages/analyses-details/analyses-details.component';
 
 export const routes: Routes = [
   {
@@ -30,7 +32,10 @@ export const routes: Routes = [
     title: 'Dashboard',
     children: [
       { path: '', component: MainDashboardComponent, title: 'OptiLab - Home' },
-      { path: 'labos', component: LabosComponent, title: 'OptiLab - Home' }    ]
+      { path: 'labos', component: LabosComponent, title: 'OptiLab - Labos' } , 
+      { path: 'analyses', component: AnalysesComponent, title: 'OptiLab - analyses' } , 
+      { path: 'analyses/:id', component: AnalysesDetailsComponent, title: 'OptiLab - analyses details' } , ]
+      
   },
   {
     path: 'user',
