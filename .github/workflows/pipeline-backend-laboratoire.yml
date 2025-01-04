@@ -77,6 +77,13 @@ jobs:
   sonar-analysis:
     runs-on: ubuntu-latest
     name: SonarQube Analysis
+    services:
+      sonarqube:
+        image: sonarqube:lts
+        ports:
+          - 9000:9000
+        env:
+          SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -94,15 +101,16 @@ jobs:
       - name: Run SonarQube Analysis
         env:
           SONAR_HOST_URL: http://localhost:9000
-          SONAR_TOKEN: sqa_2b9cd1f13e0976860532b8e62fd75eac70c7cc6c
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd backend/laboratoire
           mvn sonar:sonar \
-            -Dsonar.projectKey=optilab-labo\
+            -Dsonar.projectKey=optilab-labo \
             -Dsonar.sources=src/main/java \
             -Dsonar.tests=src/test/java \
             -Dsonar.java.binaries=target/classes \
             -Dsonar.sourceEncoding=UTF-8
+
 
   build:
     runs-on: ubuntu-latest
