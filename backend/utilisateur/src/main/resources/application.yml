@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: utilisateur
+  datasource:
+    url: jdbc:postgresql://localhost:5432/utilisateurs
+    username: idhem
+    password: idhem
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: 'true'
+    hibernate:
+      ddl-auto: update
+  mail:
+    host: 'smtp.gmail.com'
+    port: 587
+    username: mehdi2024test@gmail.com
+    password: doxc qggy lfgc ryzs
+
+# Logging Configuration
+logging:
+  level:
+    org.keycloak: DEBUG
+    org:
+      springframework:
+        security: DEBUG
+
+# Management Configuration
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      zipkin:
+        enabled: true
+
+keycloak:
+  realm: optilab-realm
+  auth-server-url: http://localhost:8089
+  client-id: optilab-client
+  client-secret: Se2xnIlTKDZcT3ISvRPhjVfATj3cCzju
+  auth-url: http://localhost:8089/realms/optilab-realm/protocol/openid-connect/token
+
+server:
+  port: 8085
+
+# Eureka Configuration
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+# JWT Configuration
+jwt:
+  auth:
+    converter:
+      resource-id: optilab-client
+      principle-attribute: preferred_username

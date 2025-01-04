@@ -4,6 +4,7 @@ import com.optilab.laboratoire.DTO.request.LaboratoireRequest;
 import com.optilab.laboratoire.DTO.response.LaboratoireResponse;
 import com.optilab.laboratoire.entities.Laboratoire;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper

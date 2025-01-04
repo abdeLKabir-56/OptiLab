@@ -3,9 +3,11 @@ package com.optilab.laboratoire.controllers;
 import com.optilab.laboratoire.DTO.request.LaboratoireRequest;
 import com.optilab.laboratoire.DTO.response.LaboratoireResponse;
 import com.optilab.laboratoire.services.LaboratoireService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +25,9 @@ public class LaboratoireController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize(
+            "hasRole('ADMIN')"
+    )
     public ResponseEntity<LaboratoireResponse> getLaboratoireById(@PathVariable Long id) {
         return ResponseEntity.ok(laboratoireService.getLaboratoireById(id));
     }
@@ -42,5 +47,10 @@ public class LaboratoireController {
     public ResponseEntity<Void> deleteLaboratoire(@PathVariable Long id) {
         laboratoireService.deleteLaboratoire(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/is-exist")
+    public Boolean isLaboratoireExist(@PathVariable Long id) {
+        return this.laboratoireService.isLaboExist(id);
     }
 }

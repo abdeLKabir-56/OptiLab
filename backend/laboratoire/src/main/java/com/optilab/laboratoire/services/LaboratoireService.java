@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -57,25 +56,49 @@ public class LaboratoireService {
     public LaboratoireResponse getLaboratoireById(Long id) {
         Laboratoire laboratoire = laboratoireRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Laboratoire not found with ID: " + id));
-        return LaboratoireMapper.INSTANCE.toResponse(laboratoire);
+        ContactLaboratoire contactLaboratoire = this.contactLaboratoireService.getContactLaboratoireByLaboId(id);
+        LaboratoireResponse laboratoireResponse = LaboratoireMapper.INSTANCE.toResponse(laboratoire);
+        return LaboratoireResponse.builder()
+                .contactLaboratoirId(contactLaboratoire.getId())
+                .nom(laboratoireResponse.nom())
+                .nrc(laboratoireResponse.nrc())
+                .logo(laboratoireResponse.logo())
+                .active(laboratoireResponse.active())
+                .dateActivation(laboratoireResponse.dateActivation())
+                .adresseId(contactLaboratoire.getAdresse().getId())
+                .id(laboratoireResponse.id())
+                .build();
     }
 
     public List<LaboratoireResponse> getAllLaboratoires() {
-        return laboratoireRepository.findAll()
+        List<LaboratoireResponse> laboratoireResponses = laboratoireRepository.findAll()
                 .stream()
                 .map(LaboratoireMapper.INSTANCE::toResponse)
-                .collect(Collectors.toList());
+                .toList();
+        return laboratoireResponses.stream()
+                .map(laboratoireResponse -> {
+                    ContactLaboratoire contactLaboratoire = this.contactLaboratoireService.getContactLaboratoireByLaboId(laboratoireResponse.id());
+                    return LaboratoireResponse.builder()
+                            .contactLaboratoirId(contactLaboratoire.getId())
+                            .nom(laboratoireResponse.nom())
+                            .nrc(laboratoireResponse.nrc())
+                            .logo(laboratoireResponse.logo())
+                            .active(laboratoireResponse.active())
+                            .dateActivation(laboratoireResponse.dateActivation())
+                            .adresseId(contactLaboratoire.getAdresse().getId())
+                            .id(laboratoireResponse.id())
+                            .build();
+                })
+                .toList();
     }
 
     public LaboratoireResponse updateLaboratoire(Long id, LaboratoireRequest dto) {
         try {
             log.info("Updating Laboratoire with ID: {} and data: {}", id, dto);
 
-            // Retrieve the existing entity
             Laboratoire existingLaboratoire = laboratoireRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Laboratoire not found with ID: " + id));
 
-            // Map new fields to the existing entity
             existingLaboratoire.setNom(dto.getNom() != null ? dto.getNom() : existingLaboratoire.getNom());
             existingLaboratoire.setLogo(dto.getLogo() != null ? dto.getLogo() : existingLaboratoire.getLogo());
             existingLaboratoire.setNrc(dto.getNrc() != null ? dto.getNrc() : existingLaboratoire.getNrc());
@@ -111,6 +134,10 @@ public class LaboratoireService {
             log.error("Error deleting Laboratoire with ID: {}", id, ex);
             throw new RuntimeException("Failed to delete Laboratoire: " + ex.getMessage(), ex);
         }
+    }
+
+    public Boolean isLaboExist (Long id) {
+        return this.laboratoireRepository.existsById(id);
     }
 
 }
