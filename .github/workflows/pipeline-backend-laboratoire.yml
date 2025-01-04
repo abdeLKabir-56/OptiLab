@@ -93,8 +93,8 @@ jobs:
           sudo apt-get install -y maven
       - name: Run SonarQube Analysis
         env:
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: http://localhost:9000
+          SONAR_TOKEN: sqa_2b9cd1f13e0976860532b8e62fd75eac70c7cc6c
         run: |
           cd backend/laboratoire
           mvn sonar:sonar \
