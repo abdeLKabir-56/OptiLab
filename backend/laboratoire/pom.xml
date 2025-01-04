@@ -30,6 +30,8 @@
 		<java.version>17</java.version>
 		<spring-cloud.version>2022.0.3</spring-cloud.version>
 		<mapstruct.version>1.6.3</mapstruct.version>
+		<sonar.host.url>http://localhost:9000</sonar.host.url>
+		<sonar.login>sqa_2b9cd1f13e0976860532b8e62fd75eac70c</sonar.login>
 	</properties>
 	<dependencies>
 		<dependency>
