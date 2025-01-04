@@ -1,4 +1,3 @@
-# .github/workflows/laboratoire-backend.yml
 name: Laboratoire Backend Pipeline
 
 on:
@@ -75,10 +74,40 @@ jobs:
           cd backend/laboratoire
           mvn clean test
 
+  sonar-analysis:
+    runs-on: ubuntu-latest
+    name: SonarQube Analysis
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'temurin'
+      - name: Install Maven
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y maven
+      - name: Run SonarQube Analysis
+        env:
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          cd backend/laboratoire
+          mvn sonar:sonar \
+            -Dsonar.projectKey=laboratoire-backend \
+            -Dsonar.sources=src/main/java \
+            -Dsonar.tests=src/test/java \
+            -Dsonar.java.binaries=target/classes \
+            -Dsonar.sourceEncoding=UTF-8
+
   build:
     runs-on: ubuntu-latest
     name: Build Laboratoire
-    needs: [compile, unit-test]
+    needs: [compile, unit-test, sonar-analysis]
     services:
       postgres:
         image: postgres:latest
