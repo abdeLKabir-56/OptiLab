@@ -4,7 +4,7 @@ export interface Examen {
 }
 
 export interface Epreuve {
-  id: string; // Identifiant unique de l'épreuve
+  id:  number; // Identifiant unique de l'épreuve
   nom: string; // Nom de l'épreuve
   examen: Examen; // Informations sur l'examen
 }

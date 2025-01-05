@@ -56,22 +56,24 @@ import { Epreuve } from '../../types/analysis';
   providers:[AnalysesService ,MessageService , ConfirmationService]
 })
 export class AnalysesDetailsComponent {
+ id = Number(this.router.snapshot.paramMap.get('id'));
 analyse:Analyse={} as Analyse
 epreuves: Epreuve[] = [];
   epreuveDialog: boolean = false;
   deleteEpreuveDialog: boolean = false;
   deleteEpreuvesDialog: boolean = false;
   epreuve!: Epreuve ;
-  selectedEpreuves: Epreuve[] = [];
+  selectedEpreuves: Epreuve[] | null = [];
   submitted: boolean = false;
   cols: any[] = [];
   exportColumns: any[] = [];
   @ViewChild('dt') dt!: Table;
 constructor(private router:ActivatedRoute  , private analyseService:AnalysesService , private messageService: MessageService,
   private confirmationService: ConfirmationService){}
+
 ngOnInit() {
-  const id = Number(this.router.snapshot.paramMap.get('id'));
-  this.analyseService.getAnalyseById(id).subscribe((data)=>{
+  
+  this.analyseService.getAnalyseById(this.id).subscribe((data)=>{
     this.analyse=data
     this.epreuves=this.analyse.epreuves
   })
@@ -86,12 +88,91 @@ exportCSV() {
   this.dt.exportCSV();
 }
 openNew() {
-  this.epreuve = {} as Epreuve;
+  this.epreuve = { examen: {} } as Epreuve;
   this.submitted = false;
   this.epreuveDialog = true;
 }
-editAnalyse(epreuve: Epreuve) {
+
+editEpreuve(epreuve: Epreuve) {
   this.epreuve = { ...epreuve };
   this.epreuveDialog = true;
+}
+
+deleteSelectedEpreuves() {
+  this.confirmationService.confirm({
+    message: 'Are you sure you want to delete the selected analyses?',
+    header: 'Confirm',
+    icon: 'pi pi-exclamation-triangle',
+    accept: () => {
+      this.epreuves = this.epreuves.filter((val) => !this.selectedEpreuves?.includes(val));
+      this.selectedEpreuves = null;
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Successful',
+        detail: 'Analyses Deleted',
+        life: 3000
+      });
+    }
+  });
+}
+applyFilterGlobal($event: any, stringVal: any) {
+  this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+}
+
+hideDialog() {
+  this.epreuveDialog = false;
+  this.submitted = false;
+}
+
+saveEpreuve() {
+  this.submitted = true;
+
+  if (this.epreuve.nom?.trim()) {
+    if (this.epreuve.id) {
+      this.epreuves[this.findIndexById(this.epreuve.id)] = this.epreuve;
+      this.analyse.epreuves = this.epreuves;
+      this.analyseService.updateAnalyse(this.id, this.analyse).subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Successful',
+            detail: 'Analyse Updated',
+            life: 3000
+          });
+        },
+        error: () => console.log("Cannot update")
+      });
+    } else {
+      this.epreuves.push(this.epreuve);
+      this.analyse.epreuves = this.epreuves;
+      this.analyseService.updateAnalyse(this.id, this.analyse).subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Successful',
+            detail: 'Epreuve Added',
+            life: 3000
+          });
+        },
+        error: () => console.log("Cannot add")
+      });
+    }
+    this.epreuves = [...this.epreuves];
+    this.epreuveDialog = false;
+    this.analyse = {} as Analyse;
+  }
+}
+
+
+findIndexById(id: number): number {
+  let index = -1;
+  for (let i = 0; i < this.epreuves.length; i++) {
+    if (this.epreuves[i].id === id) {
+      index = i;
+      break;
+    }
+  }
+
+  return index;
 }
 }

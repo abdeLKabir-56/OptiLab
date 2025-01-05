@@ -8,9 +8,8 @@
     <p-toast />
     <p-toolbar styleClass="mb-6">
         <ng-template #start>
-          <p-button label="New" icon="pi pi-plus" class="mr-2" (onClick)="openNew()"  />
-            <p-button severity="danger" label="Delete" icon="pi pi-trash" outlined  [disabled]="!selectedEpreuves || !selectedEpreuves.length" />
-            <!-- <p-button severity="danger" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedEpreuves()" [disabled]="!selectedEpreuves || !selectedEpreuves.length" /> -->
+          <p-button label="Add Epreuve" icon="pi pi-plus" class="mr-2" (onClick)="openNew()"  />
+             <p-button severity="danger" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedEpreuves()" [disabled]="!selectedEpreuves || !selectedEpreuves.length" />
         </ng-template>
 
         <ng-template #end>
@@ -32,14 +31,14 @@
         dataKey="id"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [showCurrentPageReport]="true"
+        size="small"
     >
         <ng-template #caption>
             <div class="flex items-center justify-between">
                 <h5 class="m-0">Manage Epreuves</h5>
                 <p-iconfield>
                     <p-inputicon styleClass="pi pi-search" />
-                    <input pInputText type="text"  placeholder="Filter" />
-                    <!-- <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Filter" /> -->
+                     <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Filter" /> 
                 </p-iconfield>
             </div>
         </ng-template>
@@ -69,13 +68,12 @@
                     <p-tableCheckbox [value]="epreuve" />
                 </td>
                 <td style="min-width: 16rem">{{ epreuve.nom }}</td>
-                <td style="min-width: 16rem">{{ epreuve.resultat }}</td>
-                <td style="min-width: 16rem">{{ epreuve.observations }}</td>
+                <td style="min-width: 16rem">{{ epreuve.examen.resultat }}</td>
+                <td style="min-width: 16rem">{{ epreuve.examen.observations }}</td>
                 <td>
-                  <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true"  />
+                  <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" (click)="editEpreuve(epreuve)" [outlined]="true"  />
                     <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true"  />
-                    <!-- <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editEpreuve(epreuve)" />
-                    <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteEpreuve(epreuve)" /> -->
+                    <!-- <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteEpreuve(epreuve)" /> -->
                 </td>
             </tr>
         </ng-template>
@@ -99,12 +97,9 @@
                 </div>
             </div>
         </ng-template>
-
         <ng-template #footer>
-          <p-button label="Cancel" icon="pi pi-times" text  />
-            <p-button label="Save" icon="pi pi-check"  />
-            <!-- <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
-            <p-button label="Save" icon="pi pi-check" (click)="saveEpreuve()" /> -->
+             <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+            <p-button label="Save" icon="pi pi-check" (click)="saveEpreuve()" />
         </ng-template>
     </p-dialog>
 
