@@ -430,5 +430,51 @@
         }
       ]
     }
+  ] , 
+  "users": [
+    {
+      "id": 1,
+      "username": "abdelkabirElhammoussi@gmail.com",
+      "password": "password123",
+      "role": "PATIENT"
+    },
+    {
+      "id": 2,
+      "username": "technicien@gmail.com",
+      "password": "password123",
+      "role": "TECHNICIEN"
+    },
+    {
+      "id": 3,
+      "username": "admin@gmail.com",
+      "password": "password123",
+      "role": "ADMIN"
+    }
+  ] , 
+  "userDetails": [
+    {
+      "id": 1,
+      "prenom": "Abdelkabir",
+      "nom": "Elhamoussi",
+      "email": "abdelkabirElhammoussi@gmail.com",
+      "adress": "Khoruibga 10 Bloc C Boujniba Rue ChhajaLekher",
+      "telephone": "+06465415415"
+    },
+    {
+      "id": 2,
+      "prenom": "Jane",
+      "nom": "Smith",
+      "email": "jane.smith@example.com",
+      "adress": "456 Elm St, Townsville",
+      "telephone": "+987654321"
+    },
+    {
+      "id": 3,
+      "prenom": "Alice",
+      "nom": "Johnson",
+      "email": "alice.johnson@example.com",
+      "adress": "789 Pine St, Villagetown",
+      "telephone": "+112233445"
+    }
   ]
 }

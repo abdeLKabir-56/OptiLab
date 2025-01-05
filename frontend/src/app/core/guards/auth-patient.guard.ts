@@ -5,14 +5,14 @@ import { AuthService } from '../../services/auth/auth-service.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthPatientGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(route: any): boolean {
     const user = this.authService.currentUser;
     const expectedRole = route.data.role;
 
-    if (user && user.role === "ADMIN" || user!.role === "TECHNICIEN") {
+    if (user && user.role === "PATIENT") {
       return true;
     } else {
       this.router.navigate(['/']);

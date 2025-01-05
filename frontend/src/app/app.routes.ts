@@ -14,6 +14,8 @@ import { MedicalFolderComponent } from './pages/medical-folder/medical-folder.co
 import { AnalysisComponent } from './pages/analysis/analysis.component';
 import { AnalysesComponent } from './pages/analyses/analyses.component';
 import { AnalysesDetailsComponent } from './pages/analyses-details/analyses-details.component';
+import { AuthPatientGuard } from './core/guards/auth-patient.guard';
+import { UsersListComponent } from './pages/users-list/users-list.component';
 
 export const routes: Routes = [
   {
@@ -34,13 +36,14 @@ export const routes: Routes = [
       { path: '', component: MainDashboardComponent, title: 'OptiLab - Home' },
       { path: 'labos', component: LabosComponent, title: 'OptiLab - Labos' } , 
       { path: 'analyses', component: AnalysesComponent, title: 'OptiLab - analyses' } , 
-      { path: 'analyses/:id', component: AnalysesDetailsComponent, title: 'OptiLab - analyses details' } , ]
+      { path: 'analyses/:id', component: AnalysesDetailsComponent, title: 'OptiLab - analyses details' } , 
+      { path: 'users', component: UsersListComponent, title: 'OptiLab - analyses' }]
       
   },
   {
     path: 'user',
     component: UserPortalComponent, // Separate layout
-    canActivate: [AuthGuard],
+    canActivate: [AuthPatientGuard],
     title: 'user',
     children: [
       { path: '', redirectTo: '/user/profile', pathMatch: 'full'},
