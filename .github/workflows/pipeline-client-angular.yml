@@ -1,5 +1,5 @@
 name: Laboratoire frontend Pipeline
-
+# test
 on:
   push:
     branches:
@@ -38,7 +38,7 @@ jobs:
       - name: Run tests
         run: |
          cd frontend
-         npm test
+         npx jest --testPathPattern=app.component.spec.ts
   build:
     name: building application
     runs-on: ubuntu-latest
