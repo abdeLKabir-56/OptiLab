@@ -1,45 +1,104 @@
-version: '3.8'
-
 services:
-  eureka-server:
-    build:
-      context: ./eureka-server
-    container_name: eureka-server
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - eureka.client.register-with-eureka=false
-      - eureka.client.fetch-registry=false
-      - eureka.instance.hostname=eureka-server
+  sonarqube:
+    image: sonarqube:community
+    container_name: sonarqube
     ports:
-      - "8761:8761"
+      - "9000:9000"
+    environment:
+      SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
+      SONAR_JDBC_URL: jdbc:postgresql://db:5432/sonar
+      SONAR_JDBC_USERNAME: sonar
+      SONAR_JDBC_PASSWORD: sonar
+    depends_on:
+      - db
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
 
   postgres:
-    image: postgres:13
-    container_name: postgres2
+    container_name: postgres
+    image: postgres
     environment:
-      - POSTGRES_DB=laboratoire
-      - POSTGRES_USER=idhem
-      - POSTGRES_PASSWORD=idhem
+      POSTGRES_USER: idhem
+      POSTGRES_PASSWORD: idhem
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data2:/var/lib/postgresql/data2
-
-  laboratoire:
-    build:
-      context: ./laboratoire
-    container_name: laboratoire
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres2:5432/laboratoire
-      - SPRING_DATASOURCE_USERNAME=idhem
-      - SPRING_DATASOURCE_PASSWORD=idhem
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
-    ports:
-      - "8080:8080"
-    depends_on:
-      - eureka-server
+    networks:
       - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - postgres
+      - keycloak_network
+    restart: unless-stopped
+
+  keycloak_db:
+    image: postgres:latest
+    volumes:
+      - postgres:/data/postgres/keycloak_db
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: keycloak_db
+      POSTGRES_USER: idhem
+      POSTGRES_PASSWORD: idhem
+    command: [ "postgres", "-c", "shared_preload_libraries=pg_stat_statements", "-c", "log_statement=all" ]
+    networks:
+      - keycloak_network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.0
+    command: start
+    environment:
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8089
+      KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HEALTH_ENABLED: true
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak_db/keycloak_db
+      KC_DB_URL_DATABASE: keycloak_db
+      KC_DB_URL_PORT: 5433
+      KC_DB_USERNAME: idhem
+      KC_DB_PASSWORD: idhem
+    ports:
+      - "8089:8080"
+    restart: always
+    depends_on:
+      - keycloak_db
+    networks:
+      - keycloak_network
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+
+networks:
+  postgres:
+    driver: bridge
+  keycloak_network:
+    driver: bridge
 
 volumes:
-  postgres_data2:
+  postgres:
+  pgadmin:
