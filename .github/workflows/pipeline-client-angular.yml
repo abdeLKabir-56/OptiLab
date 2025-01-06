@@ -59,6 +59,13 @@ jobs:
         run: |
           cd frontend
           npm ci
+
+      - name: Install Chrome dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget curl unzip
+          sudo apt-get install -y libnss3 libgconf-2-4 libatk1.0-0 libcups2 libxss1 libgdk-pixbuf2.0-0 libasound2
+
       # {5}
       - name: Run e2e tests
         run: |

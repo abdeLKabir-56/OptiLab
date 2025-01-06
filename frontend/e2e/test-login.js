@@ -2,7 +2,13 @@ import { Builder, By, until } from 'selenium-webdriver';
 import { expect } from 'chai';
 
 (async () => {
-  const driver = await new Builder().forBrowser('chrome').build();
+  const options = new chrome.Options();
+  options.addArguments(
+    '--headless',          // Run headlessly
+    '--disable-gpu',       // Disable GPU for headless mode
+    '--no-sandbox',        // Avoid issues with sandboxing in CI
+    '--disable-dev-shm-usage'  // Avoid shared memory issues in CI
+  );
   await driver.get('http://localhost:4200');
 
   const signInButton = await driver.findElement(By.id('sign'));
