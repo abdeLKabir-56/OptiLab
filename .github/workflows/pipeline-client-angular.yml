@@ -59,6 +59,7 @@ jobs:
         run: |
           cd frontend
           npm ci
+          
 
       - name: Install Chrome dependencies
         run: |
@@ -70,6 +71,7 @@ jobs:
       - name: Run e2e tests
         run: |
          cd frontend
+         npm start
          cd e2e
          node test-login.js
 
