@@ -39,10 +39,35 @@ jobs:
         run: |
          cd frontend
          npx jest --testPathPattern=app.component.spec.ts
+ e2e:
+    name: e2e test with selenuim
+    runs-on: ubuntu-latest
+    steps:
+      # {2}
+      - name: Checkout the source code
+        uses: actions/checkout@v3
+
+      # {3}
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      # {4}
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+      # {5}
+      - name: Run e2e tests
+        run: |
+         cd frontend
+         cd e2e
+         node test-login.js
   build:
     name: building application
     runs-on: ubuntu-latest
-    needs: test
+    needs: [test,e2e]
     steps:
       # {2}
       - name: Checkout the source code
